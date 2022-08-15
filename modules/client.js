@@ -1,8 +1,7 @@
 const { GatewayIntentBits, Client, Collection, EmbedBuilder } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, 32509] });
-const config = require('../config.json');
 client.properties = {};
-client.properties.token = config.token;
+client.properties.token = process.env['TOKEN'];
 const { botProperties } = require('../utils/database');
 if(!botProperties.has('prefix')) {
     botProperties.set('prefix', '!');

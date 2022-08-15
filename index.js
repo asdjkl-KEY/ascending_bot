@@ -1,3 +1,4 @@
+require('dotenv').config();
 const client = require('./modules/client');
 const server = require('./utils/server');
 const path = require('path');
