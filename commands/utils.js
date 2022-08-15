@@ -33,11 +33,12 @@ module.exports = {
         }
         switch(args[0]){
             case 'token':
+                let token = tk.token();
                 let embed = new _ET({
                     color: 'random',
                     title: 'TOKEN',
                     description: `
-                    Aquí tiene un Token Generado con el TOKEN_ENGINE_V7 de SparklyBot: **${tk.token()}**
+                    Aquí tiene un Token Generado con el TOKEN_ENGINE_V7 de SparklyBot: **${token}**
                     `,
                     message
                 })
