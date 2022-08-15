@@ -10,6 +10,7 @@ module.exports = {
         if(!args[0]){
             return message.channel.send('Necesitas especificar el prefijo');
         }
+        if(message.author.id !== message.guild.owner.id) return message.reply('Solo el dueño del servidor puede usar este comando');
         botProperties.set('prefix', args[0]);
         return message.reply(`Prefix set to ${args[0]}`);
     }
