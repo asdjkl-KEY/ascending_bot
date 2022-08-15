@@ -16,11 +16,11 @@ class _ET{
         this.setEmbedProperties();
     }
     async setEmbedProperties(){
-        this.embed = new EmbedBuilder()
-            .setColor(this.color)
-            .setTitle(this.title)
-            .setDescription(this.description)
-            .setFooter({ text: `Powered by A-Devs Studio`, iconURL: await botProperties.get('icon')})
+        this.embed = new EmbedBuilder();
+        this.embed.setColor(this.color)
+        this.embed.setTitle(this.title)
+        this.embed.setDescription(this.description)
+        this.embed.setFooter({ text: `Powered by A-Devs Studio`, iconURL: await botProperties.get('icon')})
     }
     send(channel){
         if(channel === 'private'){
