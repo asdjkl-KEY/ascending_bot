@@ -7,7 +7,7 @@ const tk = new ToolKit();
 
 module.exports = {
     name: 'tools',
-    alias: ['utils', 'tls'],
+    alias: ['tools', 'tls', 'utils'],
     category: 'private',
     description: 'Este comando puede usar una o varias herramientas programadas por el desarrollador',
     usage: '[tools | tls | utils] <tool>',
