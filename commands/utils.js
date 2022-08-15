@@ -19,12 +19,7 @@ module.exports = {
                 description: `
                     Especifica una herramienta para usar.
                     Estas son las herramientas disponibles:
-                    \`\`\`
-                    - Token
-                    - Uuid
-                    - Database
-                    - Matriz
-                    - Merge
+                    \`\`\`- Token\n- Uuid\n- Database\n- Matriz\n- Merge
                     \`\`\`                
                 `,
                 message
