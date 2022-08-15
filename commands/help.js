@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { botProperties } = require('../../utils/database');
+const { botProperties } = require('../utils/database');
 //const { Database } = require('jesscode-lib');
 //const db = new Database('<name>');
 

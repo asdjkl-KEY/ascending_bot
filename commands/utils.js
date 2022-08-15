@@ -1,5 +1,5 @@
 const { _ET } = require('../utils/tools');
-const { botProperties } = require('../../utils/database');
+const { botProperties } = require('../utils/database');
 //const { Database } = require('jesscode-lib');
 //const db = new Database('<name>');
 const { ToolKit } = require('jesscode-lib');
