@@ -7,6 +7,7 @@ const handler = require('./modules/handler');
 //*Load Commands//
 handler(path.join(__dirname, '/commands/'));
 handler(path.join(__dirname, '/commands/admin/'));
+handler(path.join(__dirname, '/commands/currency/'));
 
 
 server.listen(server.get('port'), () => {
