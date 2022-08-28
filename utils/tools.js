@@ -90,8 +90,19 @@ const convertTime = async(time) => {
             s[1] = timeInS.toString();
         }
     }
-    let payload = `${h[0] === 0 && h[1] === 0 ? '': h[0]+h[1]+'h, '}${min[0] === 0 && min[1] === 0 ? '': min[0]+min[1]+'min y'}${s[0] === 0 && s[1] === 0 ? '': s[0]+s[1]+'s'}`;
-    return payload;
+    let payload = ''
+    if(h[0] > 0 && h[1] > 0 || h[1] > 0){
+        payload = `${h[0]+h[1]+'h'}`
+        return payload;
+    }
+    if(min[0]>0 && min[1]>0 || min[1]>0){
+        payload = `${min[0]+min[1]+'min'}`;
+        return payload;
+    }
+    if(s[0] > 0 && s[1] > 0 || s[1]>0){
+        payload = `${s[0]+s[1]+'s'}`;
+        return payload;
+    }
 }
 
 const replyCooldown = async(message, topic) => {
