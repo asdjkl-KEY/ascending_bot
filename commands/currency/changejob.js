@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const { botProperties } = require('../../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
-let coin = require('../../utils/coinEmote.js');
+let emotes = require('../../helpers.emotes.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
@@ -40,7 +40,7 @@ module.exports = {
             return message.reply('Este es tu trabajo actual')
         }
         if(ballance.wallet < priceofchange[job]){
-            return message.reply(`No tienes suficiente dinero para cambiar de trabajo necesitas ${coin} **${priceofchange[job]} Bahrs**`)
+            return message.reply(`No tienes suficiente dinero para cambiar de trabajo necesitas ${emotes.coin} **${priceofchange[job]} Bahrs**`)
         }
         ballance.job = job;
         ballance.wallet -= priceofchange[job];
@@ -48,7 +48,7 @@ module.exports = {
         let embed = new EmbedBuilder()
         .setAuthor({name: user.username, iconURL: user.displayAvatarURL()})
         .setColor('#00fc00')
-        .setDescription(`Has cambiado de empleo exitosamente y te ha costado ${coin} **${priceofchange[job]} Bahrs**`)
+        .setDescription(`Has cambiado de empleo exitosamente y te ha costado ${emotes.coin} **${priceofchange[job]} Bahrs**`)
         .setFooter({text: user.tag, iconURL: user.displayAvatarURL()})
         .setTimestamp();
         message.reply({embeds: [embed]});

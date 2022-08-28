@@ -2,7 +2,7 @@ const { EmbedBuilder, Embed } = require('discord.js');
 // const { botProperties } = require('../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
-let coin = require('../../utils/coinEmote.js');
+let emotes = require('../../helpers.emotes.js');
 const { botProperties } = require('../../utils/database.js');
 // const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
@@ -44,7 +44,7 @@ module.exports = {
         let embed = new EmbedBuilder()
         .setAuthor({name: user.username, iconURL: user.displayAvatarURL()})
         .setColor('#00fc00')
-        .setDescription(`${jobsjefs[job]} te ha contratado y ahora recibiras a partir de ${coin} **${salaries[job]} Bahrs** por cada trabajo`)
+        .setDescription(`${jobsjefs[job]} te ha contratado y ahora recibiras a partir de ${emotes.coin} **${salaries[job]} Bahrs** por cada trabajo`)
         .setFooter({text: user.tag, iconURL: user.displayAvatarURL()})
         .setTimestamp();
         db.set(`${user.id}`, ballance)

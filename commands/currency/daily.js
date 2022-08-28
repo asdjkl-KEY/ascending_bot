@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 // const { botProperties } = require('../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
-let coin = require('../../utils/coinEmote.js');
+let emotes = require('../../helpers.emotes.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
         let embed = new EmbedBuilder()
         .setAuthor({name: user.username, iconURL: user.displayAvatarURL()})
         .setColor('#00fc00')
-        .setDescription(`Hoy has recibido ${coin} **${daily} Bahrs**. Vuelve por más en 24h`)
+        .setDescription(`Hoy has recibido ${emotes.coin} **${daily} Bahrs**. Vuelve por más en 24h`)
         .setFooter({text: user.tag, iconURL: user.displayAvatarURL()})
         .setTimestamp();
 

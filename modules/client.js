@@ -6,10 +6,23 @@ const { botProperties } = require('../utils/database');
 if(!botProperties.has('prefix')) {
     botProperties.set('prefix', '!');
 }
+const { Database } = require('jesscode-lib');
+const db = new Database('currency');
+const inventory = new Database('bags');
 client.commands = new Collection();
 
 client.on('messageCreate', async (message) => {
     const prefix = await botProperties.get('prefix');
+    const user = message.author;
+    if(!db.has(`${user.id}`)){
+        db.set(`${user.id}`, {
+            bank: 0,
+            wallet: 0
+        });
+    }
+    if(!inventory.has(`${user.id}`)){
+        inventory.set(`${user.id}`, [])
+    }
     if(message.author.bot || message.channel.type === 'DM') return;
     if(!message.content.trim().startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);

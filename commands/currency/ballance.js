@@ -2,7 +2,7 @@ const { Database } = require('jesscode-lib');
 const db = new Database('currency');
 const { EmbedBuilder } = require('discord.js');
 const { botProperties } = require('../../utils/database');
-let coin = require('../../utils/coinEmote.js');
+let emotes = require('../../helpers/emotes.js');
 const { hasCooldown, setCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
@@ -29,9 +29,9 @@ module.exports = {
             .setColor('#00ff00')
             .setAuthor({name: user.tag, iconURL: user.displayAvatarURL()})
             // .setDescription(`**Banco:** \`${ballance.bank}\` \n**Billetera:** \`${ballance.wallet}\``)
-            .addFields({name: "Bahrs", value: coin+" "+ballance.wallet, inline: true})
-            .addFields({name: "Banco:", value: coin+" "+ballance.bank, inline: true})
-            .addFields({name: "Total:", value: coin +" "+(ballance.wallet + ballance.bank), inline: true})
+            .addFields({name: "Bahrs", value: emotes.coin+" "+ballance.wallet, inline: true})
+            .addFields({name: "Banco:", value: emotes.coin+" "+ballance.bank, inline: true})
+            .addFields({name: "Total:", value: emotes.coin +" "+(ballance.wallet + ballance.bank), inline: true})
             .setTimestamp()
             .setFooter({text:'A-Devs Studio', iconURL: await botProperties.get('icon')});
         message.reply({embeds: [embed]});

@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const { botProperties } = require('../../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
-let coin = require('../../utils/coinEmote.js');
+let emotes = require('../../helpers.emotes.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 const allWorks = require('../../helpers/works.js');
 
@@ -57,7 +57,7 @@ module.exports = {
             work = work.replace('!', '');
             let quantity = Math.floor(Math.random() * salaries[ballance.job]);
             embed.setColor('#fc0000');
-            embed.setDescription(`${work} ${coin} ${quantity} **Bahrs**`);
+            embed.setDescription(`${work} ${emotes.coin} ${quantity} **Bahrs**`);
             ballance.wallet -= quantity;
             db.set(`${user.id}`, ballance);
             message.reply({embeds: [embed]});
@@ -67,7 +67,7 @@ module.exports = {
             work = work.replace('&', '');
             let quantity = Math.floor(Math.random() * salaries[ballance.job]) * 10;
             embed.setColor('#00fc00');
-            embed.setDescription(`${work} ${coin} **${quantity} Bahrs**`);
+            embed.setDescription(`${work} ${emotes.coin} **${quantity} Bahrs**`);
             ballance.wallet += quantity;
             db.set(`${user.id}`, ballance);
             message.reply({embeds: [embed]});
@@ -75,7 +75,7 @@ module.exports = {
         }
         let quantity = Math.floor(Math.random() * salaries[ballance.job]) + salaries[ballance.job];
         embed.setColor('#00fc00');
-        embed.setDescription(`${work} ${coin} **${quantity} Bahrs** por tus esfuerzos`);
+        embed.setDescription(`${work} ${emotes.coin} **${quantity} Bahrs** por tus esfuerzos`);
         ballance.wallet += quantity;
         db.set(`${user.id}`, ballance);
         message.reply({embeds: [embed]});

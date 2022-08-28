@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const { botProperties } = require('../../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
-let coin = require('../../utils/coinEmote.js');
+let emotes = require('../../helpers.emotes.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
@@ -44,10 +44,10 @@ module.exports = {
         .setColor('#00fc00')
         .setTitle("Trabajos Disponibles")
         .addFields(
-            {name: 'Police, Salario a partir de: '+coin+' '+police.salary, value: police.description},
-            {name: 'Granjero, Salario a partir de: '+coin+' '+farmer.salary, value: farmer.description},
-            {name: 'Minero, Salario a partir de: '+coin+' '+miner.salary, value: miner.description},
-            {name: 'Ladrón, Salario a partir de: '+coin+' '+robber.salary, value: robber.description}
+            {name: 'Police, Salario a partir de: '+emotes.coin+' '+police.salary, value: police.description},
+            {name: 'Granjero, Salario a partir de: '+emotes.coin+' '+farmer.salary, value: farmer.description},
+            {name: 'Minero, Salario a partir de: '+emotes.coin+' '+miner.salary, value: miner.description},
+            {name: 'Ladrón, Salario a partir de: '+emotes.coin+' '+robber.salary, value: robber.description}
             )
         .setTimestamp()
         .setFooter({text: user.tag, iconURL: user.displayAvatarURL()});
