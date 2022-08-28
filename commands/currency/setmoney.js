@@ -3,7 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
 let emotes = require('../../helpers/emotes.js');
-const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
+// const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
     name: 'setmoney',
@@ -12,7 +12,7 @@ module.exports = {
     description: 'Con este comando se establece la economia de alguien',
     usage: 'setmoney <cantidad> [usuario]',
     async execute(client, message, args){
-        const user = message.mentions.users.first();
+        let user = message.mentions.users.first();
         if(!user) user = message.author;
         const quantity = args[0];
         if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('No tienes permiso para usar este comando. Permiso necesario: `ADMINISTRADOR`')
@@ -24,5 +24,13 @@ module.exports = {
         let ballance = await db.get(`${user.id}`);
         ballance.wallet = quantity;
         db.set(`${user.id}`, ballance);
+        let embed = new EmbedBuilder()
+        .setAuthor({name: user.tag, iconURL: user.displayAvatarURL()})
+        .setColor('#00fc00')
+        .setTimestamp()
+        .setFooter({text: 'Realizado por: '+message.author.tag, iconURL: message.author.displayAvatarURL()})
+        .setDescription(`Se ha establecido la billetera de **${user.tag}** en ${emotes.coin} **${quantity} Bahrs**`)
+
+        message.reply({embeds: [embed]});
     }
 }
