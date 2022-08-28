@@ -1,4 +1,4 @@
-const { default: parseMilliseconds } = require('parse-ms-2');
+const parseMilliseconds = require('parse-ms-2');
 
 async function convertTime(time){
     time = time - Date.now();
