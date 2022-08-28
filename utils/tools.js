@@ -2,6 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const { botProperties } = require('./database');
 const { Database } = require('jesscode-lib');
 const cool = new Database('cooldown');
+const convertTime = require('./convertTime.js');
 
 class _ET{
     constructor(data){
@@ -46,64 +47,6 @@ const hasCooldown = async(topic) => {
         return false;
     }
     if(await cool.get(topic) > Date.now()) return true;
-}
-const convertTime = async(time) => {
-    console.log(time)
-    time = parseInt(time) - Date.now()
-    let d = [0,0]
-    let h = [0,0];
-    let min = [0,0];
-    let s = [0,0];
-
-    let timeInHour;
-    let timeInMin;
-    let timeInS;
-    // if(!time) return new Error('missing time');
-    if(isNaN(time)) return new Error('the time provided must be a number');
-    if(time > 3600000){
-        timeInHour = Math.floor(time/3600000);
-        if(timeInHour > 9){
-            timeInHour = timeInHour.toString();
-            h[0] = parseInt(timeInHour[0]);
-            h[1] = parseInt(timeInHour[1]);
-        } else {
-            h[1] = parseInt(timeInHour);
-        }
-    }
-    if(time > 60000){
-        timeInMin = Math.floor(time/60000);
-        if(timeInMin > 9){
-            timeInMin = timeInMin.toString();
-            min[0] = parseInt(timeInMin[0]);
-            min[1] = parseInt(timeInMin[1]);
-        } else {
-            min[1] = parseInt(timeInMin)
-        }
-    }
-    if(time > 1000){
-        timeInS = Math.floor(time/1000);
-        if(timeInS > 9){
-            timeInS = timeInS.toString();
-            s[0] = parseInt(timeInS[0]);
-            s[1] = parseInt(timeInS[1]);
-        } else {
-            s[1] = parseInt(timeInS);
-        }
-    }
-    let payload = ''
-    if(h[0] > 0 && h[1] > 0 || h[1] > 0){
-        payload = `${h[0]+h[1]+'h'}`
-        return payload;
-    }
-    if(min[0]>0 && min[1]>0 || min[1]>0){
-        payload = `${min[0]+min[1]+'min'}`;
-        return payload;
-    }
-    if(s[0] > 0 && s[1] > 0 || s[1]>0){
-        payload = `${s[0]+s[1]+'s'}`;
-        return payload;
-    }
-    return payload;
 }
 
 const replyCooldown = async(message, topic) => {

@@ -14,6 +14,7 @@
     "discord.js": "^14.2.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "jesscode-lib": "^1.7.7"
+    "jesscode-lib": "^1.7.7",
+    "parse-ms": "^3.0.0"
   }
 }
