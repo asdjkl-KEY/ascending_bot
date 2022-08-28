@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const { botProperties } = require('../../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
-let emotes = require('../../helpers.emotes.js');
+let emotes = require('../../helpers/emotes.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {

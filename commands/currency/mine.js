@@ -3,7 +3,7 @@ const { botProperties } = require('../../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
 const inventory = new Database('bags');
-let emotes = require('../../helpers.emotes.js');
+let emotes = require('../../helpers/emotes.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 function hasPick(object){
