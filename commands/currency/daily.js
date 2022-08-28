@@ -27,7 +27,7 @@ module.exports = {
         let ballance = await db.get(`${user.id}`);
         let embed = new EmbedBuilder()
         .setAuthor({name: user.username, iconURL: user.displayAvatarURL()})
-        .setColor('RANDOM')
+        .setColor('#00fc00')
         .setDescription(`Hoy has recibido ${coin} **${daily} Bahrs**. Vuelve por más en 24h`)
         .setFooter({text: user.tag, iconURL: user.displayAvatarURL()})
         .setTimestamp();
