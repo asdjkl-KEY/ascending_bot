@@ -22,7 +22,7 @@ module.exports = {
         let embed = new EmbedBuilder()
             .setTitle(`Balance de ${user.username}`)
             .setColor('#00ff00')
-            .setAuthor({name: user.tag, iconURL: user.displayAvatarURL})
+            .setAuthor({name: user.tag, iconURL: user.displayAvatarURL()})
             // .setDescription(`**Banco:** \`${ballance.bank}\` \n**Billetera:** \`${ballance.wallet}\``)
             .addFields({name: "Billetera", value: coin+" "+ballance.wallet, inline: true})
             .addFields({name: "Banco:", value: coin+" "+ballance.bank, inline: true})
@@ -30,6 +30,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({text:'A-Devs Studio', iconURL: await botProperties.get('icon')});
 
+            console.log(user)
         message.reply({embeds: [embed]});
     }
     

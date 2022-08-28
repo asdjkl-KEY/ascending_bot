@@ -24,7 +24,7 @@ module.exports = {
         if(quantity !== 'all' && isNaN(quantity)) return message.reply('Ingresa una cantidad válida');
         if(quantity <= 0) return message.reply('No tienes suficientes **Bahrs** '+coin+' para depositar');
         let embed = new EmbedBuilder()
-        .setAuthor({name: user.tag, iconURL: user.displayAvatarURL})
+        .setAuthor({name: user.tag, iconURL: user.displayAvatarURL()})
         .setColor('#00fc00')
         .setDescription(`${coin} ${(quantity === 'all' ? ballance.wallet + ballance.bank : quantity)} han sido depositados en el banco.`)
         .setTimestamp()
