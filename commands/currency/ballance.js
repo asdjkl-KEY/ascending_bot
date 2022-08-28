@@ -11,7 +11,7 @@ module.exports = {
     description: 'Check your ballance',
     usage: 'ballance [',
     async execute(client, message, args){
-        const user = message.author.id;
+        const user = message.author;
         if(!db.has(`${user.id}`)){
             db.set(`${user.id}`, {
                 bank: 0,
@@ -20,13 +20,15 @@ module.exports = {
         }
         const ballance = await db.get(`${user.id}`);
         let embed = new EmbedBuilder()
-            .setTitle(`Balance de ${message.author.username}`)
+            .setTitle(`Balance de ${user.username}`)
             .setColor('#00ff00')
+            .setAuthor({name: user.tag, iconURL: user.displayAvatarURL})
             // .setDescription(`**Banco:** \`${ballance.bank}\` \n**Billetera:** \`${ballance.wallet}\``)
-            .addFields({name: "Billetera", value: ballance.wallet + coin, inline: true})
-            .addFields({name: "Banco:", value: ballance.bank + coin, inline: true})
-            .addFields({name: "Total:", value: (ballance.wallet + ballance.bank) + coin, inline: true})
-            .setFooter({text:'Powered by A-Devs Studio', iconURL: await botProperties.get('icon')});
+            .addFields({name: "Billetera", value: coin+" "+ballance.wallet, inline: true})
+            .addFields({name: "Banco:", value: coin+" "+ballance.bank, inline: true})
+            .addFields({name: "Total:", value: coin +" "+(ballance.wallet + ballance.bank), inline: true})
+            .setTimestamp()
+            .setFooter({text:'A-Devs Studio', iconURL: await botProperties.get('icon')});
 
         message.reply({embeds: [embed]});
     }
