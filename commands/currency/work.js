@@ -48,7 +48,7 @@ module.exports = {
             return message.reply({embeds: [embed]})
         }
         let works = allWorks[ballance.job];
-        let work = allWorks[Math.floor(Math.random() * allWorks.length)];
+        let work = works[Math.floor(Math.random() * works.length)];
         let embed = new EmbedBuilder()
         .setAuthor({name: user.username, iconURL: user.displayAvatarURL()})
         .setFooter({text: user.tag, iconURL: user.displayAvatarURL()})
