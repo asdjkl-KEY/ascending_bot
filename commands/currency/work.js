@@ -63,6 +63,16 @@ module.exports = {
             message.reply({embeds: [embed]});
             return setCooldown(3600000, topic);
         }
+        if(works.startsWith('&')){
+            work = work.replace('&', '');
+            let quantity = Math.floor(Math.random() * salaries[ballance.job]) * 10;
+            embed.setColor('#00fc00');
+            embed.setDescription(`${work} ${coin} **${quantity} Bahrs**`);
+            ballance.wallet += quantity;
+            db.set(`${user.id}`, ballance);
+            message.reply({embeds: [embed]});
+            return setCooldown(3600000, topic);
+        }
         let quantity = Math.floor(Math.random() * salaries[ballance.job]) + salaries[ballance.job];
         embed.setColor('#00fc00');
         embed.setDescription(`${work} ${coin} **${quantity} Bahrs** por tus esfuerzos`);

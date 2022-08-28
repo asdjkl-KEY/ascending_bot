@@ -11,6 +11,7 @@ let works = {
         'Has atrapado inteligentemente a un estratega criminal que intentaba negociar por rehenes y te han pagado'
     ],
     farmer: [
+        '&Has encontrado un tesoro muy valioso y estaba valorado en',
         'Has trabajado arando la tierra todo el día y te han pagado',
         '!Te has enfermado en pleno trabajo, te llevaron al hospital y has tenido que pagar',
         'Has recolectado maíz todo el día y te han pagado',
