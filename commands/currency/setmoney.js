@@ -6,11 +6,11 @@ let emotes = require('../../helpers/emotes.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
-    name: '',
-    alias: [''],
-    category: '',
-    description: '',
-    usage: '',
+    name: 'setmoney',
+    alias: ['setmoney'],
+    category: 'private',
+    description: 'Con este comando se establece la economia de alguien',
+    usage: 'setmoney <cantidad> [usuario]',
     async execute(client, message, args){
         const user = message.mentions.users.first();
         if(!user) user = message.author;

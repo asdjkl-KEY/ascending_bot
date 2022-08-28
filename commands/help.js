@@ -30,7 +30,8 @@ module.exports = {
             .setTitle(`Ayuda para el comando ${command.name}`)
             .setColor('#00ff00')
             .setDescription(`**Nombre:** \`${command.name}\` \n**Alias:** \`${command.alias}\` \n**Categoria:** \`${command.category}\` \n**Descripcion:** \`${command.description}\` \n**Uso:** \`${command.usage}\``)
-            .setFooter({text:'Powered by A-Devs Studio', iconURL: await botProperties.get('icon')});
+            .setFooter({text:'<> obligatorio, [] opcional'})
+            .setTimestamp();
 
         message.channel.send({embeds: [embed]});
     }
