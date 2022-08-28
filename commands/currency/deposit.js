@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 // const { botProperties } = require('../utils/database');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
-let coin = '<:Bahrs:1013192853687648306>';
+let coin = require('../../utils/coinEmote.js');
 const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
                 wallet: 0
             })
         }
-        if(hasCooldown(`${user.id}:deposit`)){
+        if(await hasCooldown(`${user.id}:deposit`)){
             return replyCooldown(message, `${user.id}:deposit`)
         }
         const ballance = await db.get(`${user.id}`);
@@ -35,7 +35,7 @@ module.exports = {
         .setTimestamp()
         .setFooter({text: user.tag, iconURL: user.displayAvatarURL()});
         message.reply({embeds: [embed]})
-        setCooldown(10000)
+        setCooldown(5000, `${user.id}:deposit`)
         if(quantity === 'all'){
             ballance.bank += ballance.wallet;
             ballance.wallet = 0;

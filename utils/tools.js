@@ -29,7 +29,7 @@ class _ET{
     }
 }
 
-const setCooldown = (cooldown = 0, topic = '') => {
+const setCooldown = (cooldown, topic) => {
     if(!cooldown) return new Error('No cooldown provided');
     if(isNaN(cooldown)) return new Error('The cooldown provided isNaN');
     if(cooldown <= 0) return new Error("the cooldown provided must not be less than or equal to 0");
@@ -37,7 +37,7 @@ const setCooldown = (cooldown = 0, topic = '') => {
     if(typeof topic !== 'string') return new Error('The topic provided must be a string');
     cool.set(topic, Date.now() + cooldown);
 }
-const hasCooldown = async(topic = '') => {
+const hasCooldown = async(topic) => {
     if(!topic) return new Error('No topic provided');
     if(typeof topic !== 'string') return new Error('The topic must be a string');
     if(!cool.has(topic)) return false;
@@ -48,6 +48,8 @@ const hasCooldown = async(topic = '') => {
     if(await cool.get(topic) > Date.now()) return true;
 }
 const convertTime = async(time) => {
+    console.log(time)
+    time = time - Date.now()
     let d = [0,0]
     let h = [0,0];
     let min = [0,0];
@@ -56,7 +58,7 @@ const convertTime = async(time) => {
     let timeInHour;
     let timeInMin;
     let timeInS;
-    if(!time) return new Error('missing time');
+    // if(!time) return new Error('missing time');
     if(isNaN(time)) return new Error('the time provided must be a number');
     if(time > 3600000){
         timeInHour = Math.floor(time/3600000);
@@ -95,11 +97,12 @@ const convertTime = async(time) => {
 const replyCooldown = async(message, topic) => {
     if(!message || !topic) return new Error('missing data');
     let cooldown = await cool.get(topic);
-    if(hasCooldown(topic) === false) return;
+    if(!await hasCooldown(topic)) return;
+    let waitcool = await convertTime(cooldown);
     let embed = new EmbedBuilder()
     .setAuthor({name: message.author.tag, iconURL: message.author.displayAvatarURL()})
     .setColor('#fc0000')
-    .setDescription(`Debes esperar ${convertTime(cooldown - Date.now())} para usar este comando`)
+    .setDescription(`Debes esperar **${waitcool}** para usar este comando`)
     .setTimestamp()
     .setFooter({text: message.author.tag, iconURL: message.author.displayAvatarURL()});
 

@@ -2,7 +2,8 @@ const { Database } = require('jesscode-lib');
 const db = new Database('currency');
 const { EmbedBuilder } = require('discord.js');
 const { botProperties } = require('../../utils/database');
-let coin = '<:Bahrs:1013192853687648306>';
+let coin = require('../../utils/coinEmote.js');
+const { hasCooldown, setCooldown, replyCooldown } = require('../../utils/tools.js');
 
 module.exports = {
     name: 'ballance',
@@ -12,11 +13,15 @@ module.exports = {
     usage: 'ballance [',
     async execute(client, message, args){
         const user = message.author;
+        let topic = `${user.id}:ballance`;
         if(!db.has(`${user.id}`)){
             db.set(`${user.id}`, {
                 bank: 0,
                 wallet: 0
             });
+        }
+        if(await hasCooldown(topic)){
+            return replyCooldown(message, topic);
         }
         const ballance = await db.get(`${user.id}`);
         let embed = new EmbedBuilder()
@@ -29,9 +34,8 @@ module.exports = {
             .addFields({name: "Total:", value: coin +" "+(ballance.wallet + ballance.bank), inline: true})
             .setTimestamp()
             .setFooter({text:'A-Devs Studio', iconURL: await botProperties.get('icon')});
-
-            console.log(user)
         message.reply({embeds: [embed]});
+        return setCooldown(5000, topic)
     }
     
 }
