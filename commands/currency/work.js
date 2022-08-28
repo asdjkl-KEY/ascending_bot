@@ -63,7 +63,7 @@ module.exports = {
             message.reply({embeds: [embed]});
             return setCooldown(3600000, topic);
         }
-        if(works.startsWith('&')){
+        if(work.startsWith('&')){
             work = work.replace('&', '');
             let quantity = Math.floor(Math.random() * salaries[ballance.job]) * 10;
             embed.setColor('#00fc00');
