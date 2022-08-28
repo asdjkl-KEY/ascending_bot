@@ -49,7 +49,7 @@ const hasCooldown = async(topic) => {
 }
 const convertTime = async(time) => {
     console.log(time)
-    time = time - Date.now()
+    time = parseInt(time) - Date.now()
     let d = [0,0]
     let h = [0,0];
     let min = [0,0];
@@ -64,30 +64,30 @@ const convertTime = async(time) => {
         timeInHour = Math.floor(time/3600000);
         if(timeInHour > 9){
             timeInHour = timeInHour.toString();
-            h[0] = timeInHour[0];
-            h[1] = timeInHour[1];
+            h[0] = parseInt(timeInHour[0]);
+            h[1] = parseInt(timeInHour[1]);
         } else {
-            h[1] = timeInHour.toString();
+            h[1] = parseInt(timeInHour);
         }
     }
     if(time > 60000){
         timeInMin = Math.floor(time/60000);
         if(timeInMin > 9){
             timeInMin = timeInMin.toString();
-            min[0] = timeInMin[0];
-            min[1] = timeInMin[1];
+            min[0] = parseINt(timeInMin[0]);
+            min[1] = parseInt(timeInMin[1]);
         } else {
-            min[1] = timeInMin.toString();
+            min[1] = parseInt(timeInMin)
         }
     }
     if(time > 1000){
         timeInS = Math.floor(time/1000);
         if(timeInS > 9){
             timeInS = timeInS.toString();
-            s[0] = timeInS[0];
-            s[1] = timeInS[1];
+            s[0] = parseInt(timeInS[0]);
+            s[1] = parseInt(timeInS[1]);
         } else {
-            s[1] = timeInS.toString();
+            s[1] = parseInt(timeInS);
         }
     }
     let payload = ''
@@ -103,6 +103,7 @@ const convertTime = async(time) => {
         payload = `${s[0]+s[1]+'s'}`;
         return payload;
     }
+    return payload;
 }
 
 const replyCooldown = async(message, topic) => {
