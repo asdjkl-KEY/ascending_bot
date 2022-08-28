@@ -16,7 +16,7 @@ module.exports = {
         if(!user) user = message.author;
         const quantity = args[0];
         if(!message.member.permissions.has('ADMINISTRATOR')) return message.reply('No tienes permiso para usar este comando. Permiso necesario: `ADMINISTRADOR`')
-        if(user.id == client.user.id || user.id == message.guild.me.id) return message.reply('No puedes establecer mi economia')
+        if(user.id == client.user.id) return message.reply('No puedes establecer mi economia')
         if(user.bot) return message.reply('El usuario es un bot y no se puede establecer una economia');
         if(!quantity) return message.reply('Especifica la cantidad a ser colocada');
         if(isNaN(parseInt(quantity))) return message.reply('El valor especificado no es un número');
