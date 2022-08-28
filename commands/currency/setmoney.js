@@ -22,7 +22,7 @@ module.exports = {
         if(isNaN(parseInt(quantity))) return message.reply('El valor especificado no es un número');
         if(quantity <= 0 ) return message.reply('La cantidad no puede ser menor o igual a 0');
         let ballance = await db.get(`${user.id}`);
-        ballance.wallet = quantity;
+        ballance.wallet = parseInt(quantity);
         db.set(`${user.id}`, ballance);
         let embed = new EmbedBuilder()
         .setAuthor({name: user.tag, iconURL: user.displayAvatarURL()})
