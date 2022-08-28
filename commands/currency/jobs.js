@@ -42,6 +42,7 @@ module.exports = {
         let embed = new EmbedBuilder()
         .setAuthor({name: user.username, iconURL: user.displayAvatarURL()})
         .setColor('#00fc00')
+        .setTitle("Trabajos Disponibles")
         .addFields(
             {name: 'Police, Salario a partir de: '+coin+' '+police.salary, value: police.description},
             {name: 'Granjero, Salario a partir de: '+coin+' '+farmer.salary, value: farmer.description},
