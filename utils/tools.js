@@ -74,7 +74,7 @@ const convertTime = async(time) => {
         timeInMin = Math.floor(time/60000);
         if(timeInMin > 9){
             timeInMin = timeInMin.toString();
-            min[0] = parseINt(timeInMin[0]);
+            min[0] = parseInt(timeInMin[0]);
             min[1] = parseInt(timeInMin[1]);
         } else {
             min[1] = parseInt(timeInMin)
