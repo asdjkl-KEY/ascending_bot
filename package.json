@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/rest": "^1.1.0",
+    "canvas": "^2.9.3",
     "colors": "^1.4.0",
     "discord.js": "^14.2.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "jesscode-lib": "^1.7.7",
+    "jesscode-lib": "^1.8.0",
     "parse-ms-2": "^1.0.0"
   }
 }

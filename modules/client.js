@@ -21,7 +21,7 @@ client.on('messageCreate', async (message) => {
         });
     }
     if(!inventory.has(`${user.id}`)){
-        inventory.set(`${user.id}`, [])
+        inventory.set(`${user.id}`, {})
     }
     if(message.author.bot || message.channel.type === 'DM') return;
     if(!message.content.trim().startsWith(prefix)) return;

@@ -69,7 +69,8 @@ module.exports = {
         if(!bag[ore]){
             bag[ore] = {
                 quantity: quantity,
-                emote: emotes[ore]
+                stackable: true,
+                emote: ore
             }
         }
         ballance.wallet += coins;
