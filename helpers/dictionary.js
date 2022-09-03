@@ -5,3 +5,5 @@ let dic = {
     pickaxe: "Pico",
     rocavital: "Roca Vital",
 }
+
+module.exports = dic;
