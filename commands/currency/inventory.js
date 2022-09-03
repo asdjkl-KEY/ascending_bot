@@ -27,9 +27,9 @@ module.exports = {
         .setFooter({text: `Página ${page+1}/${pages.length}`})
         .setTimestamp();
         if(pages.length > 0){
-            embed.setDescription(items.map(i => {
+            embed.setDescription(`${items.map(i => {
                 return `**${emotes[bag[i].emote]} ${dic[i]}** \`x${bag[i].quantity}\`\n`
-            }));
+            })}`);
         } else {
             embed.setDescription(`**Tu inventario está vacío  >-<**`);
         }
