@@ -7,6 +7,16 @@ let dic = require('../../helpers/dictionary');
 // const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
 const tk = new ToolKit();
 
+function replace(string){
+    let a = '';
+    for(let i = 0; i< string.length; i++){
+        if(string[i] !== ','){
+            a += string[i];
+        }
+    }
+    return a;
+}
+
 module.exports = {
     name: 'inventory',
     alias: ['bag'],
@@ -27,9 +37,9 @@ module.exports = {
         .setFooter({text: `Página ${page+1}/${pages.length}`})
         .setTimestamp();
         if(pages.length > 0){
-            embed.setDescription(`${items.map(i => {
+            embed.setDescription(`${replace(`${items.map(i => {
                 return `**${emotes[bag[i].emote]} ${dic[i]}** \`x${bag[i].quantity}\`\n`
-            })}`);
+            })}`)}`);
         } else {
             embed.setDescription(`**Tu inventario está vacío  >-<**`);
         }
