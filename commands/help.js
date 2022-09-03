@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require('discord.js');
-const { botProperties } = require('../utils/database');
 //const { Database } = require('jesscode-lib');
 //const db = new Database('<name>');
 
@@ -9,13 +8,12 @@ module.exports = {
     category: 'public',
     description: 'Te brinda ayuda sobre un comando o muestra todos los comandos',
     usage: 'help | help <comando>',
-    async execute(client, message, args){
+    async execute(client, message, args, Variables){
         if(!args[0]){
             const embed = new EmbedBuilder()
                 .setTitle('Lista de comandos')
                 .setColor('#00ff00')
-                .setDescription('Para ver la ayuda de un comando, escribe `help <comando>`')
-                .setFooter({text:'Powered by A-Devs Studio', iconURL: await botProperties.get('icon')});
+                .setDescription('Para ver la ayuda de un comando, escribe `help <comando>`');
             message.channel.send({embeds: [embed]});
             return;
         }
@@ -23,7 +21,7 @@ module.exports = {
         if(!command){
             return message.channel.send('Comando no encontrado');
         }
-        if(command.category === 'private' && parseInt(message.author.id) !== parseInt(await botProperties.get('ownerID'))){
+        if(command.category === 'private' && parseInt(message.author.id) !== parseInt(Variables.BotProperties.ownerID)){
             return message.reply('El comando es privado y solo el equipo de desarrollo puede usarlo, por lo cuál no puede describirse');
         }
         const embed = new EmbedBuilder()

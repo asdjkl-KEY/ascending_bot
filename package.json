@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node index.js",
+    "gitup": "git add . && git commit -m \"GitUp\" && git push origin master"
   },
   "engines": {
     "node": "16.14.2",

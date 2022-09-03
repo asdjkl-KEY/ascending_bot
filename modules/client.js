@@ -3,16 +3,14 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 client.properties = {};
 client.properties.token = process.env['TOKEN'];
 const { botProperties } = require('../utils/database');
-if(!botProperties.has('prefix')) {
-    botProperties.set('prefix', '!');
-}
+const { BotProperties } = require('../helpers/Export.js');
 const { Database } = require('jesscode-lib');
 const db = new Database('currency');
 const inventory = new Database('bags');
 client.commands = new Collection();
 
 client.on('messageCreate', async (message) => {
-    const prefix = await botProperties.get('prefix');
+    const prefix = BotProperties.prefix;
     const user = message.author;
     if(!db.has(`${user.id}`)){
         db.set(`${user.id}`, {
@@ -38,14 +36,18 @@ client.on('messageCreate', async (message) => {
         return message.channel.send({embeds: [embed]});
     }
     if(cmd){
-        if(cmd.category === 'private' && parseInt(message.author.id) !== await botProperties.get('ownerID')){
+        if(cmd.category === 'private' && parseInt(message.author.id) !== BotProperties.ownerID){
             return;
         }
-        cmd.execute(client, message, args);
+        cmd.execute(client, message, args, {
+            BotProperties,
+            Emotes,
+            Dictionary
+        });
     }
 })
 client.on('ready', async() => {
-    const prefix = await botProperties.get('prefix');
+    const prefix = BotProperties.prefix;
     const states = [prefix+"help", "Ascendiendo", "The One"]
     let setPresence = {
         run:async(client) => {
