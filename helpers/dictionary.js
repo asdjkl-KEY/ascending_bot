@@ -4,6 +4,10 @@ let dic = {
     gold: "Oro",
     pickaxe: "Pico",
     rocavital: "Roca Vital",
+    public: "Publico",
+    currency: "Economía",
+    private: "Privado",
+    admin: "Administración"
 }
 
 module.exports = dic;

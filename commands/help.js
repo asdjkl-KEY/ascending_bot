@@ -22,7 +22,9 @@ module.exports = {
             client.commands.map(c => {
                 if(!commands[c.category]){
                     commands[c.category] = [];
-                    categories.push(c.category);
+                    if(c.category !== 'private'){
+                        categories.push(c.category);
+                    }
                 }
                 commands[c.category].push(c.name)
             })
@@ -31,13 +33,14 @@ module.exports = {
             .setColor('#00fc00')
             .setFooter({text: "Para saber sobre un comando usa **"+Variables.BotProperties.prefix+"help <comando>**"})
             .setTimestamp()
-            .setDescription(`
-            ${categories.map(category => {
-                return `${category}\n \`${commands[category].map(cmd => {
-                    return `${cmd}`;
-                })}\`\n\n`
-            })}
-            `);
+            .addFields(categories.map(category => {
+                return {
+                    name: Variables.Dictionary[category].toUpperCase(),
+                    value: `${commands[category].map(cmd => {
+                        return `\`${cmd}\`${commands[category].indexOf(cmd) == 0 ? '' : commands[category].indexOf(cmd) % 9 == 0 ? `\n` : ``}`
+                    })}`
+                }
+            }))
             return message.reply({embeds: [embed]});
         }
         const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.name && cmd.alias.includes(args[0]));
