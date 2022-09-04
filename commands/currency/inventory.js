@@ -23,7 +23,7 @@ module.exports = {
     category: 'currency',
     description: 'Con este comando podrás ver todo lo que está en tu inventario',
     usage: 'inventory [page] | bag [page]',
-    async execute(client, message, args){
+    async execute(client, message, args, Resources){
         const user = message.author;
         let bag = await bags.get(`${user.id}`);
         let itemKeys = Object.keys(bag);
@@ -36,9 +36,9 @@ module.exports = {
         .setColor('#00fc00')
         .setFooter({text: `Página ${page+1}/${pages.length}`})
         .setTimestamp();
-        if(pages.length > 0){
+        if(items.length > 0){
             embed.setDescription(`${replace(`${items.map(i => {
-                return `**${emotes[bag[i].emote]} ${dic[i]}** \`x${bag[i].quantity}\`\n`
+                return `**${Resources.Emotes[bag[i].emote]} ${dic[i]}** \`x${bag[i].quantity}\`\n`
             })}`)}`);
         } else {
             embed.setDescription(`**Tu inventario está vacío  >-<**`);
