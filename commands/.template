@@ -1,9 +1,6 @@
 // const { EmbedBuilder } = require('discord.js');
-// const { botProperties } = require('../../utils/database');
 //const { Database } = require('jesscode-lib');
-//const db = new Database('<name>');
-let emotes = require('../../helpers/emotes.js');
-const { setCooldown, hasCooldown, replyCooldown } = require('../../utils/tools.js');
+//const db = new Database('currency');
 
 module.exports = {
     name: '',
@@ -11,7 +8,7 @@ module.exports = {
     category: '',
     description: '',
     usage: '',
-    async execute(client, message, args){
+    async execute(client, message, args, Resources){
 
     }
 }

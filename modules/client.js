@@ -2,26 +2,27 @@ const { GatewayIntentBits, Client, Collection, EmbedBuilder } = require('discord
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, 32509] });
 client.properties = {};
 client.properties.token = process.env['TOKEN'];
-const { botProperties } = require('../utils/database');
 const { BotProperties, Emotes, Dictionary } = require('../helpers/Export.js');
 const { Database } = require('jesscode-lib');
-const db = new Database('currency');
-const inventory = new Database('bags');
+const currency = new Database('currency');
+const inventories = new Database('bags');
 client.commands = new Collection();
+const { setCooldown, hasCooldown, replyCooldown } = require('../utils/tools');
+const general = new Database('General_Database');
 
 client.on('messageCreate', async (message) => {
     const prefix = BotProperties.prefix;
     const user = message.author;
-    if(!db.has(`${user.id}`)){
-        db.set(`${user.id}`, {
+    if(message.author.bot || message.channel.type === 'DM') return;
+    if(!currency.has(`${user.id}`)){
+        currency.set(`${user.id}`, {
             bank: 0,
             wallet: 0
         });
     }
-    if(!inventory.has(`${user.id}`)){
-        inventory.set(`${user.id}`, {})
+    if(!inventories.has(`${user.id}`)){
+        inventories.set(`${user.id}`, {})
     }
-    if(message.author.bot || message.channel.type === 'DM') return;
     if(!message.content.trim().startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
@@ -42,7 +43,11 @@ client.on('messageCreate', async (message) => {
         cmd.execute(client, message, args, {
             BotProperties,
             Emotes,
-            Dictionary
+            Dictionary,
+            hasCooldown,
+            setCooldown,
+            replyCooldown,
+            Databases: { currency, inventories, general }
         });
     }
 })

@@ -9,13 +9,36 @@ module.exports = {
     description: 'Te brinda ayuda sobre un comando o muestra todos los comandos',
     usage: 'help | help <comando>',
     async execute(client, message, args, Variables){
+        const user = message.author;
         if(!args[0]){
-            const embed = new EmbedBuilder()
-                .setTitle('Lista de comandos')
-                .setColor('#00ff00')
-                .setDescription('Para ver la ayuda de un comando, escribe `help <comando>`');
-            message.channel.send({embeds: [embed]});
-            return;
+            // const embed = new EmbedBuilder()
+            //     .setTitle('Lista de comandos')
+            //     .setColor('#00ff00')
+            //     .setDescription('Para ver la ayuda de un comando, escribe `help <comando>`');
+            // message.channel.send({embeds: [embed]});
+            // return;
+            let categories = [];
+            let commands = {}
+            client.commands.map(c => {
+                if(!commands[c.category]){
+                    commands[c.category] = [];
+                    categories.push(c.category);
+                }
+                commands[c.category].push(c.name)
+            })
+            let embed = new EmbedBuilder()
+            .setAuthor({name: user.username, iconURL: user.displayAvatarURL()})
+            .setColor('#00fc00')
+            .setFooter({text: "Para saber sobre un comando usa **"+Variables.BotProperties.prefix+"help <comando>**"})
+            .setTimestamp()
+            .setDescription(`
+            ${categories.map(category => {
+                return `${category}\n \`${commands[category].map(cmd => {
+                    return `${cmd}`;
+                })}\`\n\n`
+            })}
+            `);
+            return message.reply({embeds: [embed]});
         }
         const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.name && cmd.alias.includes(args[0]));
         if(!command){
