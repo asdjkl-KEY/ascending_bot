@@ -94,7 +94,7 @@ module.exports = {
         //delete the file
         setTimeout(() => {
             fs.unlinkSync(path.join(__dirname, '..', 'rank.png'));
-        }, 5000)
+        }, 1000)
 
     }
 }
