@@ -40,15 +40,21 @@ module.exports = {
         //set the name
         ctx.font = 'bold 50px sans-serif';
         ctx.fillStyle = '#333333';
-        ctx.fillText(user.tag, 420, 150);
+        ctx.fillText(interaction.options.getUser('usuario').tag || interaction.user.tag, 420, 150);
         //set the level
         ctx.font = 'bold 50px sans-serif';
         ctx.fillStyle = '#333333';
-        ctx.fillText("LEVEL: "+(await ranks.get(interaction.guild.id))[user.id].level, 420, 250);
+        ctx.fillText("LEVEL: "+(async () => {
+            return ((await ranks.get(interaction.guild.id))[user.id].level)
+        })(), 420, 250);
         //set the xp
         ctx.font = 'bold 50px sans-serif';
         ctx.fillStyle = '#0009';
-        ctx.fillText("XP: "+(await ranks.get(interaction.guild.id))[user.id].xp+"/"+levels[parseInt((await ranks.get(interaction.guild.id))[user.id].level)+1], 420, 350);
+        ctx.fillText("XP: "+(async () => {
+            return ((await ranks.get(interaction.guild.id))[user.id].xp)
+        })()+"/"+(async () => {
+            return (levels[parseInt((await ranks.get(interaction.guild.id))[user.id].level)+1])
+        })(), 420, 350);
         //set the rounded progress bar
         ctx.fillStyle = '#555';
         ctx.fillRect(100, 420, 800, 35);
@@ -57,7 +63,9 @@ module.exports = {
         ctx.closePath();
         ctx.fill();
         ctx.fillStyle = '#ff3cf7';
-        ctx.fillRect(100, 420, 800*(parseInt((await ranks.get(interaction.guild.id))[user.id].xp)/levels[parseInt((await ranks.get(interaction.guild.id))[user.id].level)+1]), 35);
+        ctx.fillRect(100, 420, 800*(async () => {
+            return ((parseInt((await ranks.get(interaction.guild.id))[user.id].xp)/levels[parseInt((await ranks.get(interaction.guild.id))[user.id].level)+1]));
+        })(), 35);
         ctx.beginPath();
         ctx.arc(100, 437.5, 17.5, Math.PI *2, 0, true);
         ctx.closePath();
