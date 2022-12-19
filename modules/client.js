@@ -71,6 +71,8 @@ client.on('messageCreate', async (message) => {
     if(!command) return message.reply('No se obtuvo ningún comando.');
     const cmd = client.commands.get(command) || client.commands.find(c => c.name && c.alias.includes(command));
     if(!cmd) {
+        let g = await general.get(message.guild.id);
+        if(g && !g.nocomands) return;
         let embed = new EmbedBuilder()
             .setColor('#ff0000')
             .setTitle('COMANDO INEXISTENTE')
