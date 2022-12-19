@@ -1,15 +1,19 @@
 require('dotenv').config();
-const client = require('./modules/client');
+require('colors');
+const { client } = require('./modules/client');
 const server = require('./utils/server');
 const path = require('path');
 const handler = require('./modules/handler');
+const slashHandler = require('./modules/slashHandler');
 const { setRoot } = require('jesscode-lib');
 setRoot(path.join(__dirname, '/databases/'));
 
 //*Load Commands//
 handler(path.join(__dirname, '/commands/'));
+handler(path.join(__dirname, '/commands/bedrock/'));
 handler(path.join(__dirname, '/commands/admin/'));
-handler(path.join(__dirname, '/commands/currency/'));
+handler(path.join(__dirname, '/commands/diversion/'));
+slashHandler.run();
 
 
 server.listen(server.get('port'), () => {

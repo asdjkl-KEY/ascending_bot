@@ -1,14 +1,12 @@
-// const { EmbedBuilder } = require('discord.js');
-//const { Database } = require('jesscode-lib');
-//const db = new Database('currency');
+//R son los recursos enviados desde el handler.
 
 module.exports = {
     name: '',
-    alias: [''],
+    alias: [],
     category: '',
     description: '',
     usage: '',
-    async execute(client, message, args, Resources){
+    async execute(client, message, args, R){
 
     }
 }

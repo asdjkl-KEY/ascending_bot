@@ -1,7 +1,6 @@
 const parseMilliseconds = require('parse-ms-2');
 
 async function convertTime(time){
-    time = time - Date.now();
     let times = parseMilliseconds(time);
     if(times.days > 0) return times.days+'d';
     if(times.hours > 0) return times.hours+'h';

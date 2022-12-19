@@ -2,3 +2,6 @@
 /databases
 .env
 package-lock.json
+.AddCompLib/
+test.js
+test.html

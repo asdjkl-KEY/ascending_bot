@@ -2,27 +2,69 @@ const { GatewayIntentBits, Client, Collection, EmbedBuilder } = require('discord
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, 32509] });
 client.properties = {};
 client.properties.token = process.env['TOKEN'];
-const { BotProperties, Emotes, Dictionary } = require('../helpers/Export.js');
+const BotProperties = require('../helpers/botProperties.json');
 const { Database } = require('jesscode-lib');
-const currency = new Database('currency');
-const inventories = new Database('bags');
 client.commands = new Collection();
-const { setCooldown, hasCooldown, replyCooldown } = require('../utils/tools');
+const { cooldown } = require('../utils/tools');
 const general = new Database('General_Database');
+const registers = new Database('registers');
+const Shop = new Database('shop');
+const links = require('../helpers/links.js');
+const axl = require('app-xbox-live');
+const { slashCommands } = require('./slashHandler');
+const path = require('path');
+let levels = [0, 100, 200, 500, 700, 1000, 1300, 1500, 1700, 2000, 2500, 2800, 3200, 3500, 3800, 4100, 4600, 4900, 5200, 5700, 6000, 6300, 6800, 7100, 7400, 7900, 8200, 8700, 9000, 9500, 10000]
+const ranks = new Database('ranks');
 
 client.on('messageCreate', async (message) => {
+    const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
     const prefix = BotProperties.prefix;
     const user = message.author;
     if(message.author.bot || message.channel.type === 'DM') return;
-    if(!currency.has(`${user.id}`)){
-        currency.set(`${user.id}`, {
-            bank: 0,
-            wallet: 0
-        });
+    // XP SYSTEM
+    if(!general.has(message.guild.id)){
+        general.set(message.guild.id, {});
     }
-    if(!inventories.has(`${user.id}`)){
-        inventories.set(`${user.id}`, {})
-    }
+    let g = await general.get(message.guild.id);
+    if(g['xpactived']){
+        if(!ranks.has(message.guild.id)){
+            ranks.set(message.guild.id, {});
+        }
+        let guild = await ranks.get(message.guild.id);
+        if(!guild[user.id]){
+            guild[user.id] = {
+                level: 0,
+                xp: 0
+            }
+            ranks.set(message.guild.id, guild);
+        }
+        let xp = message.content.length;
+        let finalXP = Math.floor(Math.random() * xp/10 * 7);
+        guild[user.id] = {
+            level: guild[user.id].level,
+            xp: guild[user.id].xp + finalXP
+        }
+        if(guild[user.id].xp >= levels[guild[user.id].level + 1]){
+            guild[user.id] = {
+                level: guild[user.id].level + 1,
+                xp: guild[user.id].xp - levels[guild[user.id].level]
+            }
+        }
+        ranks.set(message.guild.id, guild);
+        if(g['logslevel']){
+            let channel = client.channels.cache.get(g['logslevel']);
+            if(channel){
+                let embed = new EmbedBuilder()
+                    .setColor('#ff0000')
+                    .setTitle('LEVEL UP!')
+                    .setDescription(`El usuario ${user} ha subido de nivel.`)
+                    .addField('Nivel anterior:', guild[user.id].level - 1)
+                    .addField('Nivel actual:', guild[user.id].level)
+                    .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
+                channel.send({embeds: [embed]});
+            }
+        }
+    } //end xp system
     if(!message.content.trim().startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
@@ -32,7 +74,7 @@ client.on('messageCreate', async (message) => {
         let embed = new EmbedBuilder()
             .setColor('#ff0000')
             .setTitle('COMANDO INEXISTENTE')
-            .setDescription(`El comando \`${command}\` no existe o está en desarrollo.`)
+            .setDescription(`El comando __**\`${command}\`**__ no existe o está en desarrollo.`)
             .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
         return message.channel.send({embeds: [embed]});
     }
@@ -42,18 +84,17 @@ client.on('messageCreate', async (message) => {
         }
         cmd.execute(client, message, args, {
             BotProperties,
-            Emotes,
-            Dictionary,
-            hasCooldown,
-            setCooldown,
-            replyCooldown,
-            Databases: { currency, inventories, general }
+            Databases: { general, Shop, registers },
+            embed: EmbedBuilder,
+            links,
+            xl,
+            cooldown
         });
     }
 })
 client.on('ready', async() => {
     const prefix = BotProperties.prefix;
-    const states = [prefix+"help", "Ascendiendo", "The One"]
+    const states = [prefix+"help", "Ascendiendo"]
     let setPresence = {
         run:async(client) => {
           setTimeout(() => { client.user.setActivity(states[Math.floor(Math.random() * states.length)]);
@@ -66,6 +107,22 @@ client.on('ready', async() => {
     setPresence.run(client);
     console.log("Bot is Ready!!")
 })
+client.on('interactionCreate', async (interaction) => {
+    if(interaction.isCommand()){
+        const command = slashCommands.includes(interaction.commandName) ? require(path.join(__dirname,`../slashCommands/${interaction.commandName}.js`)) : null;
+        if(!command) return interaction.reply({content: 'Comando no encontrado.', ephemeral: true});
+        if(command.category === 'private' && parseInt(interaction.user.id) !== BotProperties.ownerID){
+            return interaction.reply({content: 'Este comando es Privado', ephemeral: true});
+        }
+        command.execute(interaction, client, {
+            BotProperties,
+            Databases: { general, Shop, registers },
+            embed: EmbedBuilder,
+            links,
+            cooldown
+        });
+    }
+});
 
 
-module.exports = client;
+module.exports = { client }

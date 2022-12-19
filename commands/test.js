@@ -1,12 +1,12 @@
+//R son los recursos enviados desde el handler.
 
 
 module.exports = {
     name: 'test',
-    alias: ['test'],
+    alias: ['t'],
     category: 'private',
-    description: 'Test command',
-    usage: 'test',
-    execute(client, message, args){
-        message.channel.send('Test command executed');
+    description: '1,2,3 probando, probando',
+    usage: '<prefix> test',
+    async execute(client, message, args, R){
     }
 }
