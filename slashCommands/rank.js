@@ -40,7 +40,7 @@ module.exports = {
         //set the name
         ctx.font = 'bold 50px sans-serif';
         ctx.fillStyle = '#333333';
-        ctx.fillText(interaction.options.getUser('usuario').tag || interaction.user.tag, 420, 150);
+        ctx.fillText(interaction.options.getUser('usuario') ? interaction.options.getUser('usuario') : interaction.user.tag, 420, 150);
         //set the level
         ctx.font = 'bold 50px sans-serif';
         ctx.fillStyle = '#333333';
