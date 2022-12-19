@@ -44,15 +44,15 @@ module.exports = {
         //set the level
         ctx.font = 'bold 50px sans-serif';
         ctx.fillStyle = '#333333';
-        ctx.fillText("LEVEL: "+(async () => {
+        ctx.fillText("LEVEL: "+ await (async () => {
             return ((await ranks.get(interaction.guild.id))[user.id].level)
         })(), 420, 250);
         //set the xp
         ctx.font = 'bold 50px sans-serif';
         ctx.fillStyle = '#0009';
-        ctx.fillText("XP: "+(async () => {
+        ctx.fillText("XP: "+await (async () => {
             return ((await ranks.get(interaction.guild.id))[user.id].xp)
-        })()+"/"+(async () => {
+        })()+"/"+await(async () => {
             return (levels[parseInt((await ranks.get(interaction.guild.id))[user.id].level)+1])
         })(), 420, 350);
         //set the rounded progress bar
@@ -63,7 +63,7 @@ module.exports = {
         ctx.closePath();
         ctx.fill();
         ctx.fillStyle = '#ff3cf7';
-        ctx.fillRect(100, 420, 800*(async () => {
+        ctx.fillRect(100, 420, 800*await(async () => {
             return ((parseInt((await ranks.get(interaction.guild.id))[user.id].xp)/levels[parseInt((await ranks.get(interaction.guild.id))[user.id].level)+1]));
         })(), 35);
         ctx.beginPath();
