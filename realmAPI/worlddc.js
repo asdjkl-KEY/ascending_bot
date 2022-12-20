@@ -1,7 +1,7 @@
 const config = require('./config.json');
 let chat
 if (config.realm == true) {
-    chat = require('./nonrealms').chat;
+    chat = require('./nonrealms');
 }
 else {
     chat = require('./ws').chat;
