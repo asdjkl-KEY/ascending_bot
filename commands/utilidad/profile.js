@@ -26,7 +26,6 @@ module.exports = {
                 { name: 'Nickname', value: message.guild.members.cache.get(user.id).nickname ? message.guild.members.cache.get(user.id).nickname : "Ninguno", inline: true }
 
             )
-            .setLinks({ url: user.displayAvatarURL({ dynamic: true, size: 2048 }) })
             .setFooter({ text: `pedido por: ${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
         message.channel.send({embeds: [embed]});
     }
