@@ -73,7 +73,7 @@ client.on('messageCreate', async (message) => {
     const cmd = client.commands.get(command) || client.commands.find(c => c.name && c.alias.includes(command));
     if(!cmd) {
         let g = await general.get(message.guild.id);
-        if(g && !g.nocomands) return;
+        if(g && g.nocomands) return;
         let embed = new EmbedBuilder()
             .setColor('#ff0000')
             .setTitle('COMANDO INEXISTENTE')
@@ -104,7 +104,6 @@ client.on('messageCreate', async (message) => {
                 }
             }
         }
-        try {
             cmd.execute(client, message, args, {
                 BotProperties,
                 Databases: { general, Shop, registers },
@@ -112,10 +111,8 @@ client.on('messageCreate', async (message) => {
                 links,
                 xl,
                 cooldown
-            });
-        } catch (err) {
-            console.log(err);
-        }
+            }).then(() => {})
+            .catch(err => console.log(err));
     }
 })
 client.on('ready', async() => {
