@@ -1,8 +1,6 @@
 const { SlashCommandBuilder, messageLink } = require('discord.js');
 const { Database } = require('jesscode-lib');
 const ranks = new Database('ranks');
-const { createCanvas, loadImage } = require('canvas')
-const ctx = createCanvas(1000, 500).getContext('2d');
 const path = require('path');
 const fs = require('fs');
 let levels = [0, 100, 200, 500, 700, 1000, 1300, 1500, 1700, 2000, 2500, 2800, 3200, 3500, 3800, 4100, 4600, 4900, 5200, 5700, 6000, 6300, 6800, 7100, 7400, 7900, 8200, 8700, 9000, 9500, 10000]
@@ -17,6 +15,9 @@ module.exports = {
         // .addStringOption(option => option.setName('reason').setDescription('REASON_DESCRIPTION').setRequired(true)), // Opción de texto.
     async execute(interaction, client, R){
         await (async () => {
+            
+        const { createCanvas, loadImage } = require('canvas')
+        const ctx = createCanvas(1000, 500).getContext('2d');
             // Aquí el código del comando.
         let g = await R.Databases.general.get(interaction.guild.id);
         if(!g || !g['xpactived']) return interaction.reply({ content: 'El sistema de xp no está activado en este servidor. Usa `!xp on` para activarlo.', ephemeral: true });
