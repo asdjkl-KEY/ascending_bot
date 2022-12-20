@@ -13,6 +13,7 @@ handler(path.join(__dirname, '/commands/'));
 handler(path.join(__dirname, '/commands/bedrock/'));
 handler(path.join(__dirname, '/commands/admin/'));
 handler(path.join(__dirname, '/commands/diversion/'));
+handler(path.join(__dirname, '/commands/utilidad/'));
 slashHandler.run();
 
 
