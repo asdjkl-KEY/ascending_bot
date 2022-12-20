@@ -1,11 +1,4 @@
-const config = require('./config.json');
-let chat
-if (config.realm == true) {
-    chat = require('./nonrealms');
-}
-else {
-    chat = require('./ws').chat;
-}
+
 // const { Client, BitField } = require('discord.js')
 // const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS", "MESSAGE_CONTENT"] });
 // require('dotenv/config')
@@ -17,7 +10,7 @@ else {
 
 
 
-async function worlddc(evd) {
+async function worlddc(evd, chat) {
     if(evd.content.trim().startsWith('!')) return;
     let prefix = '$';
     let msg = evd.content;
@@ -45,7 +38,7 @@ async function worlddc(evd) {
 
 }
 
-async function ingame(client){
+async function ingame(client, chat){
     chat.on('inGame', (sender, msg) => {
         client.guilds.fetch(config.guild).then(async guild => {
             const channel = await guild.channels.fetch(config.channel)
