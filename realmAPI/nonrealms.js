@@ -9,7 +9,7 @@ var client
 
 if (config.realm) {
     client = bedrock.createClient({
-        host: 'localhost',
+        host: 'Sparkly-Bot-v2.asdjkl-key.repl.co',
         skipPing: true,
         port: 19132,
         username: config.name,
