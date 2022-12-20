@@ -28,8 +28,6 @@
     "parse-ms-2": "^1.0.0",
     "bedrock-protocol": "^3.21.0",
     "event-stream": "^4.0.1",
-    "fs": "^0.0.1-security",
-    "node": "^17.7.2",
     "node-events": "0.0.2",
     "stream": "^0.0.2",
     "uuid": "^8.3.2",
