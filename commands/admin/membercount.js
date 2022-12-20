@@ -28,7 +28,7 @@ module.exports = {
         let embed = new R.embed()
         .setTitle('Miembros del servidor')
         .setDescription(`Total: ${total}\nBots: ${bots}\nHumanos: ${humans}\nAbandonos: ${guild.leaves}`)
-        .setColor('RANDOM')
+        .setColor("#"+Math.floor(Math.random() * 16777299).toString(16))
 
         message.reply({embeds: [embed]})
     }
