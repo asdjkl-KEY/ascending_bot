@@ -52,7 +52,9 @@ module.exports = {
                     console.log(`Eliminado el rol ${deleted.name}`)
                     count++;
                 })
-                .catch(err => console.log(err));
+                .catch(_ => {
+                    console.log(`No se ha podido eliminar el rol ${role.name}`)
+                });
             });
             message.channel.send({content: "**"+count+"**"+' Roles eliminados.'});
         }
