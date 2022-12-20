@@ -10,12 +10,16 @@ module.exports = {
     description: 'Con este comando puedes eliminar todos los roles del servidor.',
     usage: '<prefix> clear-roles',
     async execute(client, message, args, R){
-        let roles = message.guild.roles.cache
+        let roles = message.guild.roles.cache;
+        let count = 0;
         roles.forEach(async role => {
             role.delete()
-            .then(deleted => console.log(`Eliminado el rol ${deleted.name}`))
+            .then(deleted => {
+                console.log(`Eliminado el rol ${deleted.name}`)
+                count++;
+            })
             .catch(err => console.log(err));
         });
-        message.channel.send({content: 'Roles eliminados.'});
+        message.channel.send({content: "**"+count+"**"+' Roles eliminados.'});
     }
 }
