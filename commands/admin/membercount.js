@@ -22,7 +22,7 @@ module.exports = {
         }
         let guild = await db.get(message.guild.id);
         console.log(message.guild.members.cache.size+ "\n\n"+ await message.guild.members.fetch())
-        let members = await message.guild.members.fetch();
+        let members = message.guild.members.cache;
         let total = members.size;
         let bots = members.filter(m => m.user.bot).size;
         let humans = total - bots;
