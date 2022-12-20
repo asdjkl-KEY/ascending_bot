@@ -21,7 +21,7 @@ module.exports = {
             db.set(message.guild.id, guild);
         }
         let guild = await db.get(message.guild.id);
-        let members = message.guild.members.cache;
+        let members = await message.guild.members.cache;
         let total = members.size;
         let bots = members.filter(m => m.user.bot).size;
         let humans = total - bots;
