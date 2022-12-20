@@ -1,5 +1,5 @@
 const { GatewayIntentBits, Client, Collection, EmbedBuilder, PermissionsBitField } = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, 32509] });
+const client = new Client({ intents: [3276799] });
 client.properties = {};
 client.properties.token = process.env['TOKEN'];
 const BotProperties = require('../helpers/botProperties.json');
