@@ -10,7 +10,7 @@ module.exports = {
     description: 'F',
     usage: '<prefix> cr',
     async execute(client, message, args, R){
-        console.log(message.channel.roles.cache);
-        message.reply({content: send, ephemeral: true})
+        //console log of roles in the channel
+        console.log(message.channel);
     }
 }
