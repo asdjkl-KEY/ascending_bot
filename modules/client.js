@@ -30,8 +30,8 @@ client.on('messageCreate', async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
     const prefix = BotProperties.prefix;
     const user = message.author;
-    worlddc(message, chat);
-    ingame(client, chat);
+    worlddc(message, chat, config, client);
+    ingame(client, chat, config);
     if(message.author.bot || message.channel.type === 'DM') return;
     // XP SYSTEM
     if(!general.has(message.guild.id)){

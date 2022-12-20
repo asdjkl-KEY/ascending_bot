@@ -10,7 +10,7 @@
 
 
 
-async function worlddc(evd, chat) {
+async function worlddc(evd, chat, config, client) {
     if(evd.content.trim().startsWith('!')) return;
     let prefix = '$';
     let msg = evd.content;
@@ -38,7 +38,7 @@ async function worlddc(evd, chat) {
 
 }
 
-async function ingame(client, chat){
+async function ingame(client, chat, config){
     chat.on('inGame', (sender, msg) => {
         client.guilds.fetch(config.guild).then(async guild => {
             const channel = await guild.channels.fetch(config.channel)
