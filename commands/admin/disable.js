@@ -3,6 +3,7 @@
 module.exports = {
     name: 'disable',
     alias: [],
+    permissions:[p.Administrator],
     category: 'admin',
     description: 'Con este comando desabilitas funciones del bot.',
     usage: '<prefix> disable <funcion>',

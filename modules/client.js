@@ -1,4 +1,4 @@
-const { GatewayIntentBits, Client, Collection, EmbedBuilder } = require('discord.js');
+const { GatewayIntentBits, Client, Collection, EmbedBuilder, PermissionsBitField } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, 32509] });
 client.properties = {};
 client.properties.token = process.env['TOKEN'];
@@ -15,6 +15,7 @@ const { slashCommands } = require('./slashHandler');
 const path = require('path');
 let levels = [0, 100, 200, 500, 700, 1000, 1300, 1500, 1700, 2000, 2500, 2800, 3200, 3500, 3800, 4100, 4600, 4900, 5200, 5700, 6000, 6300, 6800, 7100, 7400, 7900, 8200, 8700, 9000, 9500, 10000]
 const ranks = new Database('ranks');
+let p = PermissionsBitField.Flags;
 
 client.on('messageCreate', async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
@@ -83,6 +84,25 @@ client.on('messageCreate', async (message) => {
     if(cmd){
         if(cmd.category === 'private' && parseInt(message.author.id) !== BotProperties.ownerID){
             return;
+        }
+        if(cmd.permissions){
+            if(cmd.permissions.length > 0){
+                let perms = cmd.permissions;
+                let hasPerms = true;
+                perms.forEach(perm => {
+                    if(!message.member.permissions.has(perm)){
+                        hasPerms = false;
+                    }
+                });
+                if(!hasPerms){
+                    let embed = new EmbedBuilder()
+                        .setColor('#ff0000')
+                        .setTitle('PERMISOS INSUFICIENTES')
+                        .setDescription(`No tienes los permisos necesarios para ejecutar este comando.`)
+                        .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
+                    return message.channel.send({embeds: [embed]});
+                }
+            }
         }
         cmd.execute(client, message, args, {
             BotProperties,

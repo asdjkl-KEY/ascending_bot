@@ -5,6 +5,7 @@ const p = PermissionsBitField.Flags;
 module.exports = {
     name: 'unlock',
     alias: [],
+    permissions: [p.Administrator],
     category: 'admin',
     description: 'Con este comando puedes desbloquear el chat del servidor.',
     usage: '<prefix> unlock',

@@ -3,6 +3,7 @@
 module.exports = {
     name: 'xp',
     alias: [],
+    permissions: [p.Administrator],
     category: 'admin',
     description: 'Con este comando activas el sistema de xp en el servidor.',
     usage: '<prefix> xp <on/off>',

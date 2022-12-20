@@ -5,6 +5,7 @@ const p = PermissionsBitField.Flags;
 module.exports = {
     name: 'lock',
     alias: [],
+    permissions: [p.Administrator],
     category: 'admin',
     description: 'Con este comando puedes bloquear el chat del servidor.',
     usage: '<prefix> lock',

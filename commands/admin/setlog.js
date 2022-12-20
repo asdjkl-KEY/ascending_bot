@@ -5,7 +5,7 @@ module.exports = {
     name: 'setlog',
     alias: [],
     category: 'admin',
-    permissions: "MANAGE_GUILD",
+    permissions: [p.ManageGuild],
     description: 'Con este comando puedes establecer un canal de logs para el servidor',
     usage: '<prefix> setlog <#canal>',
     async execute(client, message, args, R){
