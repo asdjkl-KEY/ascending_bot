@@ -28,7 +28,6 @@
     "fs": "^0.0.1-security",
     "jesscode-lib": "^1.8.4",
     "mc-achievements": "^1.2.0",
-    "node": "^17.7.2",
     "node-events": "0.0.2",
     "parse-ms-2": "^1.0.0",
     "stream": "^0.0.2",
