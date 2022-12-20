@@ -15,13 +15,13 @@ module.exports = {
             .setColor('#ff0000')
             .setTitle(`Perfil de ${user.username}`)
             .setThumbnail(user.displayAvatarURL({ dynamic: true, size: 2048 }))
-            .setField('Nombre:', user.username)
-            .setField('ID:', user.id)
-            .setField('Discriminador:', user.discriminator)
-            .setField('Bot:', user)
-            .setField('Cuenta creada:', user.createdAt)
-            .setField('Se unió a este servidor:', message.guild.members.cache.get(user.id).joinedAt)
-            .setField('Roles:', message.guild.members.cache.get(user.id).roles.cache.map(r => r).join(' '))
+            .setFields('Nombre:', user.username)
+            .setFields('ID:', user.id)
+            .setFields('Discriminador:', user.discriminator)
+            .setFields('Bot:', user)
+            .setFields('Cuenta creada:', user.createdAt)
+            .setFields('Se unió a este servidor:', message.guild.members.cache.get(user.id).joinedAt)
+            .setFields('Roles:', message.guild.members.cache.get(user.id).roles.cache.map(r => r).join(' '))
             .setFooter({ text: `pedido por: ${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
         message.channel.send({embeds: [embed]});
     }
