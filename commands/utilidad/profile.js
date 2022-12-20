@@ -50,10 +50,10 @@ module.exports = {
                 { name: 'Tag', value: user.tag, inline: true },
                 { name: 'ID', value: user.id, inline: true },
                 { name: 'Bot', value: user.bot ? "Verdadero" : "Falso", inline: true },
-                { name: 'Cuenta creada el', value: createdAt, inline: true },
                 { name: 'Roles', value: message.guild.members.cache.get(user.id).roles.cache.map(r => r).join(' '), inline: true },
-                { name: 'Se unió a este servidor el', value: joinedAt, inline: true},
-                { name: 'Nickname', value: message.guild.members.cache.get(user.id).nickname ? message.guild.members.cache.get(user.id).nickname : "Ninguno", inline: true }
+                { name: 'Nickname', value: message.guild.members.cache.get(user.id).nickname ? message.guild.members.cache.get(user.id).nickname : "Ninguno", inline: true },
+                { name: 'Cuenta creada el', value: createdAt, inline: true },
+                { name: 'Se unió a este servidor el', value: joinedAt, inline: true}
 
             )
             .setFooter({ text: `pedido por: ${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
