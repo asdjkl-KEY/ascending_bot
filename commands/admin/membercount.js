@@ -22,13 +22,12 @@ module.exports = {
         }
         let guild = await db.get(message.guild.id);
         // console.log(message.guild.members.cache.size+ "\n\n"+ await message.guild.members.fetch())
-        let members = message.guild.members.cache;
-        let total = members.size;
+        let members = message.guild.memberCount;
         let bots = members.filter(m => m.user.bot).size;
-        let humans = total - bots;
+        let humans = members - bots;
         let embed = new R.embed()
         .setTitle('Miembros del servidor')
-        .setDescription(`Total: ${total}\nBots: ${bots}\nHumanos: ${humans}\nAbandonos: ${guild.leaves}`)
+        .setDescription(`Total: ${members}\nBots: ${bots}\nHumanos: ${humans}\nAbandonos: ${guild.leaves}`)
         .setColor("#"+Math.floor(Math.random() * 16777299).toString(16))
 
         message.reply({embeds: [embed]})
