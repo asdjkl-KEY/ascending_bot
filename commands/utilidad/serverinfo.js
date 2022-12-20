@@ -11,7 +11,7 @@ module.exports = {
     usage: '<prefix> serverinfo',
     async execute(client, message, args, R){
         let server = message.guild;
-        let owner = await server.members.fetch(server.ownerID);
+        let owner = client.users.cache.get(server.ownerId);
         let embed = new R.embed()
         .setTitle(server.name)
         .setThumbnail(server.iconURL({dynamic: true}))
@@ -20,7 +20,7 @@ module.exports = {
         .setTimestamp()
         .setFields(
             { name: 'ID', value: server.id, inline: true },
-            { name: 'Dueño', value: owner.user.tag, inline: true },
+            { name: 'Dueño', value: owner ? owner.tag : server.ownerID, inline: true },
             { name: 'Miembros', value: server.memberCount, inline: true },
             { name: 'Bots', value: server.members.cache.filter(m => m.user.bot).size, inline: true },
             { name: 'Roles', value: server.roles.cache.size, inline: true },
