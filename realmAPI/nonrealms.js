@@ -9,6 +9,9 @@ var client
 
 if (config.realm) {
     client = bedrock.createClient({
+        host: 'localhost',
+        skipPing: true,
+        port: 19132,
         username: config.name,
         offline: false,
         realms: {
