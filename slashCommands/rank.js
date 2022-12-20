@@ -16,7 +16,8 @@ module.exports = {
         .addUserOption(option => option.setName('usuario').setDescription('Usuario').setRequired(false)), // Opción de usuario.
         // .addStringOption(option => option.setName('reason').setDescription('REASON_DESCRIPTION').setRequired(true)), // Opción de texto.
     async execute(interaction, client, R){
-        // Aquí el código del comando.
+        await (async () => {
+            // Aquí el código del comando.
         let g = await R.Databases.general.get(interaction.guild.id);
         if(!g || !g['xpactived']) return interaction.reply({ content: 'El sistema de xp no está activado en este servidor. Usa `!xp on` para activarlo.', ephemeral: true });
         const user = interaction.options.getUser('usuario') || interaction.user;
@@ -97,6 +98,7 @@ module.exports = {
         setTimeout(() => {
             fs.unlinkSync(path.join(__dirname, '..', 'rank.png'));
         }, 1000)
+        })()
 
     }
 }
