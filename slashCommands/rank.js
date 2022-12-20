@@ -91,6 +91,8 @@ module.exports = {
         fs.writeFileSync(path.join(__dirname, '..', 'rank.png'), buffer);
         //send the file
         interaction.reply({ files: [path.join(__dirname, '..', 'rank.png')] });
+        //clear canvas
+        ctx.clearRect(0, 0, 1000, 500);
         //delete the file
         setTimeout(() => {
             fs.unlinkSync(path.join(__dirname, '..', 'rank.png'));
