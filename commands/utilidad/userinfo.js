@@ -3,7 +3,7 @@ const { PermissionsBitField } = require('discord.js');
 let p = PermissionsBitField.Flags;
 
 module.exports = {
-    name: 'profile',
+    name: 'userinfo',
     alias: [],
     permissions: [],
     category: 'utils',
