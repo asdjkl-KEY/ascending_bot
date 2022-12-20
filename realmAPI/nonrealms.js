@@ -1,7 +1,6 @@
 const bedrock = require('bedrock-protocol')
 process.env.DEBUG = 'minecraft-protocol'
 const { EventEmitter } = require('stream');
-const fetch = require("node-fetch");
 const uuid = require('uuid');
 const config = require('./config.json');
 var id = 0
