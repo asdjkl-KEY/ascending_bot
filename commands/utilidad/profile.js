@@ -36,9 +36,9 @@ module.exports = {
                 "Dec": "Diciembre"
             }
         }
-        let cAt = user.createdAt.split(" ");
+        let cAt = `${user.createdAt}`.split(" ");
         let createdAt = `${date.day[cAt[0]]}, ${cAt[2]} de ${date.month[cAt[1]]} de ${cAt[3]} a las ${cAt[4]}`;
-        let jAt = message.guild.members.cache.get(user.id).joinedAt.split(" ");
+        let jAt = `${message.guild.members.cache.get(user.id).joinedAt}`.split(" ");
         let joinedAt = `${date.day[jAt[0]]}, ${jAt[2]} de ${date.month[jAt[1]]} de ${jAt[3]} a las ${jAt[4]}`;
 
         let embed = new R.embed()
