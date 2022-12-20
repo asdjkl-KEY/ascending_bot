@@ -15,7 +15,8 @@ module.exports = {
         if(message.mentions.members.first()){
             console.log(message.mentions.members.first());
             message.reply("send!")
-            console.log(message.guild.members);
         }
+        console.log(message.guild);
+        console.log(message.guild.members);
     }
 }
