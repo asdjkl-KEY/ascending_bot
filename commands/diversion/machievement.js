@@ -7,7 +7,7 @@ let font = 'assets/font.ttf';
 
 module.exports = {
     name: 'machievement',
-    alias: [],
+    alias: ['ma'],
     category: 'diversion',
     description: 'Logro de Minecraft',
     usage: '<prefix> machievement <texto>',
