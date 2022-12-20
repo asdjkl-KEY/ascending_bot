@@ -5,3 +5,7 @@ package-lock.json
 .AddCompLib/
 test.js
 test.html
+realms.js
+run.bat
+setup.bat
+update.bat
