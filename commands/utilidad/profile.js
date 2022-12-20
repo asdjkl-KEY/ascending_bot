@@ -20,9 +20,9 @@ module.exports = {
                 { name: 'Tag', value: user.tag, inline: true },
                 { name: 'ID', value: user.id, inline: true },
                 { name: 'Bot', value: user.bot ? "Verdadero" : "Falso", inline: true },
-                { name: 'Cuenta creada el', value: user.createdAt, inline: true },
+                { name: 'Cuenta creada el', value: user.createdAt+"", inline: true },
                 { name: 'Roles', value: message.guild.members.cache.get(user.id).roles.cache.map(r => r).join(' | '), inline: true },
-                { name: 'Se unió a este servidor el', value: message.guild.members.cache.get(user.id).joinedAt, inline: true},
+                { name: 'Se unió a este servidor el', value: message.guild.members.cache.get(user.id).joinedAt+"", inline: true},
                 { name: 'Nickname', value: message.guild.members.cache.get(user.id).nickname ? message.guild.members.cache.get(user.id).nickname : "Ninguno", inline: true }
 
             )
