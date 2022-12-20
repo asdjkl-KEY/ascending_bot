@@ -16,7 +16,8 @@ if (config.realm) {
         offline: false,
         realms: {
             realmInvite: config.invite
-        }
+        },
+        connectTimeout: 100000
     })
 }
 
