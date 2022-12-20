@@ -1,4 +1,6 @@
 //R son los recursos enviados desde el handler.
+const { PermissionsBitField } = require('discord.js');
+let p = PermissionsBitField.Flags;
 
 module.exports = {
     name: 'xp',
