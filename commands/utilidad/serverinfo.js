@@ -26,11 +26,11 @@ module.exports = {
             { name: 'Roles', value: server.roles.cache.size+"", inline: true },
             { name: 'Canales', value: server.channels.cache.size+"", inline: true },
             { name: 'Creado el', value: server.createdAt.toLocaleString(), inline: true },
-            { name: 'Baneos', value: server.bans.cache.size+"", inline: true },
             { name: 'Emojis', value: server.emojis.cache.size+"", inline: true },
             { name: 'Nitro Boosts', value: server.premiumSubscriptionCount+"", inline: true },
             { name: 'Nitro Boosts Nivel', value: server.premiumTier+"", inline: true },
-            { name: 'Verificación', value: server.verificationLevel+"", inline: true }
+            { name: 'Verificación', value: server.verificationLevel+"", inline: true },
+            { name: 'Nivel de filtrado de contenido', value: server.explicitContentFilter+"", inline: true }
         )
         message.channel.send({embeds: [embed]});
     }
