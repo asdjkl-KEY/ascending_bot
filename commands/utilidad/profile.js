@@ -15,13 +15,20 @@ module.exports = {
             .setColor('#ff0000')
             .setTitle(`Perfil de ${user.username}`)
             .setThumbnail(user.displayAvatarURL({ dynamic: true, size: 2048 }))
-            .setFields('Nombre:', user.username)
-            .setFields('ID:', user.id)
-            .setFields('Discriminador:', user.discriminator)
-            .setFields('Bot:', user)
-            .setFields('Cuenta creada:', user.createdAt)
-            .setFields('Se unió a este servidor:', message.guild.members.cache.get(user.id).joinedAt)
-            .setFields('Roles:', message.guild.members.cache.get(user.id).roles.cache.map(r => r).join(' '))
+            .setFields(
+                { name: 'Nombre de usuario', value: user.username, inline: true },
+                { name: 'Tag', value: user.tag, inline: true },
+                { name: 'ID', value: user.id, inline: true },
+                { name: 'Bot', value: user.bot ? "Verdadero" : "Falso", inline: true },
+                { name: 'Cuenta creada el', value: user.createdAt, inline: true },
+                { name: 'Estado', value: user.presence.status, inline: true },
+                { name: 'Actividad', value: user.presence.activities[0] ? user.presence.activities[0].name : "Ninguna", inline: true },
+                { name: 'Roles', value: message.guild.members.cache.get(user.id).roles.cache.map(r => r).join(' | '), inline: true },
+                { name: 'Se unió a este servidor el', value: message.guild.members.cache.get(user.id).joinedAt, inline: true},
+                { name: 'Nickname', value: message.guild.members.cache.get(user.id).nickname ? message.guild.members.cache.get(user.id).nickname : "Ninguno", inline: true }
+
+            )
+            .setLinks({ url: user.displayAvatarURL({ dynamic: true, size: 2048 }) })
             .setFooter({ text: `pedido por: ${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
         message.channel.send({embeds: [embed]});
     }
