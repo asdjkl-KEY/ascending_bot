@@ -104,14 +104,18 @@ client.on('messageCreate', async (message) => {
                 }
             }
         }
-        cmd.execute(client, message, args, {
-            BotProperties,
-            Databases: { general, Shop, registers },
-            embed: EmbedBuilder,
-            links,
-            xl,
-            cooldown
-        });
+        try {
+            cmd.execute(client, message, args, {
+                BotProperties,
+                Databases: { general, Shop, registers },
+                embed: EmbedBuilder,
+                links,
+                xl,
+                cooldown
+            });
+        } catch (err) {
+            console.log(err);
+        }
     }
 })
 client.on('ready', async() => {
