@@ -30,7 +30,7 @@ module.exports = {
         let humans = members - bots;
         let embed = new R.embed()
         .setTitle('Miembros del servidor')
-        .setDescription(`Total: ${members}\nBots: ${bots}\nHumanos: ${humans}\nAbandonos: ${guild.leaves}`)
+        .setDescription(`Total: ${members}\nBots: ${bots}\nHumanos: ${humans}\nAbandonos: ${guild.leaves} ${guild.leavesactived ? `a partir de \`${guild.leavesdate}\`` : '(Desactivado)'}`)
         .setColor("#"+Math.floor(Math.random() * 16777299).toString(16))
 
         message.reply({embeds: [embed]})

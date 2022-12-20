@@ -1,4 +1,4 @@
-const { GatewayIntentBits, Client, Collection, EmbedBuilder, PermissionsBitField } = require('discord.js');
+const { GatewayIntentBits, Client, Collection, EmbedBuilder, PermissionsBitField, Events } = require('discord.js');
 const client = new Client({ intents: [3276799] });
 client.properties = {};
 client.properties.token = process.env['TOKEN'];
@@ -145,6 +145,23 @@ client.on('interactionCreate', async (interaction) => {
         });
     }
 });
+client.on(Events.GuildMemberRemove, async member => {
+    let g = await general.get(member.guild.id);
+    if(g){
+        if(g['leavesactived']){
+            if(!g.leaves){
+                g.leaves = 1;
+            } else {
+                g.leaves = g.leaves + 1;
+            }
+        }
+    } else {
+        general.set(member.guild.id, {
+            leavesactived: false,
+            leaves: 0
+        })
+    }
+})
 
 
 module.exports = { client }
