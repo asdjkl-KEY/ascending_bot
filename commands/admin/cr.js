@@ -12,5 +12,9 @@ module.exports = {
     async execute(client, message, args, R){
         //console log of roles in the channel
         console.log(message.channel);
+        if(message.mentions.members.first()){
+            console.log(message.mentions.members.first());
+            message.reply("send!")
+        }
     }
 }
