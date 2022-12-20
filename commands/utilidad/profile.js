@@ -13,27 +13,27 @@ module.exports = {
         let user = message.mentions.users.first() || message.author;
         let date = {
             day: {
-                Mon: "Lunes",
-                Tue: "Martes",
-                Wed: "Miércoles",
-                Thu: "Jueves",
-                Fri: "Viernes",
-                Sat: "Sábado",
-                Sun: "Domingo"
+                "Mon": "Lunes",
+                "Tue": "Martes",
+                "Wed": "Miércoles",
+                "Thu": "Jueves",
+                "Fri": "Viernes",
+                "Sat": "Sábado",
+                "Sun": "Domingo"
             },
             month: {
-                Jan: "Enero",
-                Feb: "Febrero",
-                Mar: "Marzo",
-                Apr: "Abril",
-                May: "Mayo",
-                Jun: "Junio",
-                Jul: "Julio",
-                Aug: "Agosto",
-                Sep: "Septiembre",
-                Oct: "Octubre",
-                Nov: "Noviembre",
-                Dec: "Diciembre"
+                "Jan": "Enero",
+                "Feb": "Febrero",
+                "Mar": "Marzo",
+                "Apr": "Abril",
+                "May": "Mayo",
+                "Jun": "Junio",
+                "Jul": "Julio",
+                "Aug": "Agosto",
+                "Sep": "Septiembre",
+                "Oct": "Octubre",
+                "Nov": "Noviembre",
+                "Dec": "Diciembre"
             }
         }
         let cAt = user.createdAt+"".split(" ");
