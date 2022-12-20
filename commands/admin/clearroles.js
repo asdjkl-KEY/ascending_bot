@@ -12,7 +12,9 @@ module.exports = {
     async execute(client, message, args, R){
         let roles = message.guild.roles.cache
         roles.forEach(async role => {
-            await role.delete();
+            role.delete()
+            .then(deleted => console.log(`Eliminado el rol ${deleted.name}`))
+            .catch(err => console.log(err));
         });
         message.channel.send({content: 'Roles eliminados.'});
     }
