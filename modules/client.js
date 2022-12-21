@@ -16,6 +16,7 @@ const path = require('path');
 let levels = [0, 100, 200, 500, 700, 1000, 1300, 1500, 1700, 2000, 2500, 2800, 3200, 3500, 3800, 4100, 4600, 4900, 5200, 5700, 6000, 6300, 6800, 7100, 7400, 7900, 8200, 8700, 9000, 9500, 10000]
 const ranks = new Database('ranks');
 let p = PermissionsBitField.Flags;
+const canvasWelcome = require('../helpers/canvasWelcome.js');
 
 client.on('messageCreate', async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
@@ -84,6 +85,9 @@ client.on('messageCreate', async (message) => {
     if(cmd){
         if(cmd.category === 'private' && parseInt(message.author.id) !== BotProperties.ownerID){
             return;
+        }
+        if(cmd.category === 'owner' && message.author.id !== message.guild.ownerId && parseInt(message.author.id) !== BotProperties.ownerID){
+            return message.reply("Este comando está reservado para el dueño del servidor.");
         }
         if(cmd.permissions){
             if(cmd.permissions.length > 0){
@@ -161,6 +165,37 @@ client.on(Events.GuildMemberRemove, async member => {
             leavesactived: false,
             leaves: 0
         })
+    }
+});
+client.on(Events.GuildMemberAdd, async member => {
+    let g = await general.get(member.guild.id);
+    if(!g){
+        general.set(member.guild.id, {})
+    }
+    if(g){
+        if(g.welcome){
+            let msg = g.welcome.msg ? g.welcome.msg : `Bienvenido **{usuario}** al servidor **{servidor}** eres el número **{memberCount}** en el servidor.`;
+            msg = msg.replace("{usuario}", `${member.user.tag}`);
+            msg = msg.replace("{servidor}", `${member.guild.name}`);
+            msg = msg.replace("{memberCount}", `${member.guild.memberCount}`);
+            let channel = client.channels.cache.get(g.welcome.id);
+            if(channel){
+                if(g.welcome.type === 'embed'){
+                    let emd = new EmbedBuilder()
+                        .setColor('#00ff00')
+                        .setTitle('BIENVENIDO')
+                        .setDescription(msg)
+                        .setFooter({ text: `${member.user.tag}`, iconURL: member.user.displayAvatarURL() })
+                        .setTimestamp()
+                        .setThumbnail(member.user.displayAvatarURL());
+
+                    channel.send({content: `${member.user}`, embeds: [emd]})
+                } else {
+                    channel.send({content: `${member.user}`, files: [await canvasWelcome(msg, member.user)]}).then(() => {})
+                    .catch(err => console.log(err));
+                }
+            }
+        }
     }
 })
 
