@@ -21,12 +21,12 @@ module.exports = async (msg, user) => {
     const background = await loadImage(bgURL);
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     //set the title
-    ctx.font = '30px sans-serif';
-    ctx.fillStyle = '#a00eca';
+    ctx.font = '30px bold sans-serif';
+    ctx.fillStyle = '#fff';
     ctx.fillText('Bienvenido!!', 250, 50);
     //set the message
-    ctx.font = '20px sans-serif';
-    ctx.fillStyle = '#c011f3';
+    ctx.font = '20px bold sans-serif';
+    ctx.fillStyle = '#fff';
     if(msg2.length > 0){
         ctx.fillText(msg1, 250, 150);
         ctx.fillText(msg2, 250, 180);
