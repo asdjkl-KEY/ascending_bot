@@ -174,7 +174,7 @@ client.on(Events.GuildMemberAdd, async member => {
     }
     if(g){
         if(g.welcome){
-            let msg = g.welcome.msg ? g.welcome.msg : `Bienvenid@ **{usuario}** al servidor **{servidor}** eres el número **{memberCount}** en el servidor.`;
+            let msg = g.welcome.msg ? g.welcome.msg : `Bienvenid@ **{usuario}** al servidor\n**{servidor}**\nEres el número **{memberCount}**`;
             msg = msg.replace("{usuario}", `${member.user.tag}`);
             msg = msg.replace("{servidor}", `${member.guild.name}`);
             msg = msg.replace("{memberCount}", `${member.guild.memberCount}`);
