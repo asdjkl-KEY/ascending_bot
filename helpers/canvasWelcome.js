@@ -22,11 +22,11 @@ module.exports = async (msg, user) => {
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     //set the title
     ctx.font = '30px sans-serif';
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#a00eca';
     ctx.fillText('Bienvenido!!', 250, 50);
     //set the message
     ctx.font = '20px sans-serif';
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#c011f3';
     if(msg2.length > 0){
         ctx.fillText(msg1, 250, 150);
         ctx.fillText(msg2, 250, 180);
