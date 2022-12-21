@@ -16,22 +16,11 @@ const path = require('path');
 let levels = [0, 100, 200, 500, 700, 1000, 1300, 1500, 1700, 2000, 2500, 2800, 3200, 3500, 3800, 4100, 4600, 4900, 5200, 5700, 6000, 6300, 6800, 7100, 7400, 7900, 8200, 8700, 9000, 9500, 10000]
 const ranks = new Database('ranks');
 let p = PermissionsBitField.Flags;
-const { ingame, worlddc } = require('../realmAPI/worlddc.js');
-const config = require('../realmAPI/config.json');
-let chat
-if (config.realm == true) {
-    chat = require('../realmAPI/nonrealms');
-}
-else {
-    chat = require('../realmAPI/ws').chat;
-}
 
 client.on('messageCreate', async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
     const prefix = BotProperties.prefix;
     const user = message.author;
-    worlddc(message, chat, config, client);
-    ingame(client, chat, config);
     if(message.author.bot || message.channel.type === 'DM') return;
     // XP SYSTEM
     if(!general.has(message.guild.id)){
