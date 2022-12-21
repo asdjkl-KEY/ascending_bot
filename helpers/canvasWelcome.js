@@ -8,8 +8,9 @@ module.exports = async (msg, user) => {
     let msg1 = '';
     let msg2 = '';
     let msg3 = '';
-    let reg = new RegExp('\*', 'g');
-    msg = msg.replace(reg, '');
+    for(let i = 0; i < msg.length; i++){
+        msg = msg.replace("*", '');
+    }
     if(msg.length > 40) {
         msg1 = msg.slice(0, 40);
         msg2 = msg.slice(40, 80);
