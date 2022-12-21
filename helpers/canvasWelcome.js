@@ -8,7 +8,7 @@ module.exports = async (msg, user) => {
     let msg1 = '';
     let msg2 = '';
     if(msg.length > 50) {
-        let msg = msg.split(' ');
+        msg = msg.split(' ');
         for(let i = 0; i < msg.length; i++) {
             if(i < 5) {
                 msg1 += msg[i] + ' ';
