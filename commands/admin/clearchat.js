@@ -15,7 +15,7 @@ module.exports = {
         if(isNaN(parseInt(quantity))) return message.reply('La cantidad de mensajes a eliminar debe ser un número.');
         if(parseInt(quantity) > 100) return message.reply('No puedes eliminar más de 100 mensajes a la vez.');
         if(parseInt(quantity) < 1) return message.reply('No puedes eliminar menos de 1 mensaje.');
-        let messages = await message.channel.messages.fetch({ limit: parseInt(quantity) + 1 });
+        let messages = await message.channel.messages.fetch({ limit: parseInt(quantity) });
         await message.channel.bulkDelete(messages);
         message.channel.send(`Se eliminaron ${quantity} mensajes.`).then(m => {
             setTimeout(() => {
