@@ -7,15 +7,11 @@ module.exports = async (msg, user) => {
     //divide msg if it's too long
     let msg1 = '';
     let msg2 = '';
-    if(msg.length > 50) {
-        msg = msg.split(' ');
-        for(let i = 0; i < msg.length; i++) {
-            if(i < 5) {
-                msg1 += msg[i] + ' ';
-            } else {
-                msg2 += msg[i] + ' ';
-            }
-        }
+    let msg3 = '';
+    if(msg.length > 40) {
+        msg1 = msg.slice(0, 40);
+        msg2 = msg.slice(40, 80);
+        msg3 = msg.slice(80, 120);
     }
     const ctx = canvas.getContext('2d');
     //set the background
@@ -30,7 +26,12 @@ module.exports = async (msg, user) => {
     ctx.fillStyle = '#ffffff';
     if(msg2.length > 0){
         ctx.fillText(msg1, 250, 150);
-        ctx.fillText(msg2, 250, 200);
+        ctx.fillText(msg2, 250, 180);
+        if(msg3.length > 0){
+            ctx.fillText(msg3, 250, 210);
+        }
+    } else {
+        ctx.fillText(msg1, 250, 150);
     }
     //set the avatar in a circle
     ctx.beginPath();
