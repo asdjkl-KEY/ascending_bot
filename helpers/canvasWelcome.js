@@ -22,7 +22,7 @@ module.exports = async (msg, user) => {
     ctx.font = '20px bold sans-serif';
     ctx.fillStyle = '#fff';
     for(let i = 0; i < msg.length; i++){
-        ctx.fillText(msg[i], 250, 100 + (125 +i * 25));
+        ctx.fillText(msg[i], 250, 100 + (125 +(i * 25)));
     }
     //set the avatar in a circle
     ctx.beginPath();
