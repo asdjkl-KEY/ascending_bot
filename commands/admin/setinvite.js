@@ -24,6 +24,7 @@ module.exports = {
             id: channel.id,
             type: type
         };
+        db.set(message.guild.id, guild);
         message.reply(`El canal de bienvenidas se ha establecido en ${channel}.`);
     }
 }
