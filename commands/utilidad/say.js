@@ -1,9 +1,12 @@
 //R son los recursos enviados desde el handler.
+const { PermissionsBitField } = require('discord.js');
+let p = PermissionsBitField.Flags;
 
 module.exports = {
     name: 'say',
     alias: [],
-    category: 'private',
+    permissions: [p.ManageMessages],
+    category: 'utils',
     description: 'Manda un mensaje como el bot',
     usage: '<prefix> say <mensaje>',
     async execute(client, message, args, R){

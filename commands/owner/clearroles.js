@@ -5,8 +5,8 @@ let p = PermissionsBitField.Flags;
 module.exports = {
     name: 'clear-roles',
     alias: ['crs'],
-    permissions: [p.Administrator],
-    category: 'private',
+    permissions: [],
+    category: 'owner',
     description: 'Con este comando puedes eliminar todos los roles del servidor.',
     usage: '<prefix> clear-roles',
     async execute(client, message, args, R){

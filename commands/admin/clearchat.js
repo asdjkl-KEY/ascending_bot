@@ -16,12 +16,17 @@ module.exports = {
         if(parseInt(quantity) > 100) return message.reply('No puedes eliminar más de 100 mensajes a la vez.');
         if(parseInt(quantity) < 1) return message.reply('No puedes eliminar menos de 1 mensaje.');
         let messages = await message.channel.messages.fetch({ limit: parseInt(quantity) });
-        await message.channel.bulkDelete(messages);
-        message.channel.send(`Se eliminaron ${quantity} mensajes.`).then(m => {
-            setTimeout(() => {
-                m.delete().then(() => {})
-                .catch(err => console.log(err));
-            }, 7000);
-        });
+        message.channel.bulkDelete(messages).then(() => {
+            message.channel.send(`Se eliminaron ${quantity} mensajes.`).then(m => {
+                setTimeout(() => {
+                    m.delete().then(() => {})
+                    .catch(err => console.log(err));
+                }, 7000);
+            });
+        }).catch(err => {
+            console.log(err);
+            message.channel.send("Puede que algunos mensajes sean demasiado antiguos para ser eliminados.")
+        })
+        
     }
 }
