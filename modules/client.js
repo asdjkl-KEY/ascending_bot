@@ -133,7 +133,7 @@ client.on('messageCreate', async (message) => {
                 }
             }
         }
-        if(cmd.category === 'currency' && !g.currency) return;
+        if(cmd.category === 'currency' && !(await general.get(message.guild.id)).currency) return;
             cmd.execute(client, message, args, {
                 BotProperties,
                 Databases: { general, Shop, registers, ranks, robs },
