@@ -12,7 +12,7 @@ module.exports = {
     async execute(client, message, args, R){
         let cooldown = R.cooldown;
         let user = message.author;
-        if(cooldown.has(user, 'daily')) return message.reply(`Debes esperar **${await cooldown.get('daily')}** para usar este comando.`);
+        if(await cooldown.has(user, 'daily')) return message.reply(`Debes esperar **${await cooldown.get(user, 'daily')}** para usar este comando.`);
         let db = R.Databases.ranks;
         let e = R.emojis;
         let guild = await db.get(message.guild.id);
@@ -21,7 +21,7 @@ module.exports = {
         info.money += 1000;
         guild[user.id] = info;
         db.set(message.guild.id, guild);
-        cooldown.set(user, 'daily', 3600 * 24);
+        await cooldown.set(user, 'daily', 3600 * 24);
         let embed = new R.embed()
             .setColor('#00fc00')
             .setTitle(`💰 Recompensa diaria 💰`)

@@ -30,7 +30,7 @@ async function has(user, cmd){
         return false;
     }
 }
-async function get(cmd){
+async function get(user, cmd){
     // if(db.has(cmd)){
         let times = parseTime(await db.get(cmd) - Date.now());
         

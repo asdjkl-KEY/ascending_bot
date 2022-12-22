@@ -11,6 +11,8 @@ module.exports = {
     usage: '<prefix> rob <usuario>',
     async execute(client, message, args, R){
         let user = message.author;
+        let cooldown = R.cooldown;
+        if(await cooldown.has(user, 'rob')) return message.reply(`Debes esperar **${await cooldown.get(user, 'rob')}** para usar este comando.`);
         let victim = message.mentions.users.first();
         if(!victim) return message.reply('Debes mencionar a un usuario.');
         if(victim.id === user.id) return message.reply('No puedes robarte a ti mismo.');
@@ -54,5 +56,6 @@ module.exports = {
         guild[user.id] = info;
         guild[victim.id] = victimInfo;
         await db.set(message.guild.id, guild);
+        await cooldown.set(user, 'rob', 3600);
     }
 }
