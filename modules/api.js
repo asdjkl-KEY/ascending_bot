@@ -13,6 +13,7 @@ class Database extends LibEvent {
             password: process.env['PASSWORD']
         }).then(res => {
             if(res.data.state === 'created') this.emit('create');
+            console.log(('Connected to database: ' + this.name).green)
         }).catch(err => {
             this.emit('error', err);
         });
