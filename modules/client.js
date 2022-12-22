@@ -107,44 +107,46 @@ client.on('messageCreate', async (message) => {
             .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
         return message.channel.send({embeds: [embed]});
     }
-    if(cmd){
-        if(cmd.category === 'private' && parseInt(message.author.id) !== BotProperties.ownerID){
-            return;
-        }
-        if(cmd.category === 'owner' && message.author.id !== message.guild.ownerId && parseInt(message.author.id) !== BotProperties.ownerID){
-            return message.reply("Este comando está reservado para el dueño del servidor.");
-        }
-        if(cmd.permissions){
-            if(cmd.permissions.length > 0){
-                let perms = cmd.permissions;
-                let hasPerms = true;
-                perms.forEach(perm => {
-                    if(!message.member.permissions.has(perm)){
-                        hasPerms = false;
+    general.get(message.guild.id).then(async g => {
+        if(cmd){
+            if(cmd.category === 'private' && parseInt(message.author.id) !== BotProperties.ownerID){
+                return;
+            }
+            if(cmd.category === 'owner' && message.author.id !== message.guild.ownerId && parseInt(message.author.id) !== BotProperties.ownerID){
+                return message.reply("Este comando está reservado para el dueño del servidor.");
+            }
+            if(cmd.permissions){
+                if(cmd.permissions.length > 0){
+                    let perms = cmd.permissions;
+                    let hasPerms = true;
+                    perms.forEach(perm => {
+                        if(!message.member.permissions.has(perm)){
+                            hasPerms = false;
+                        }
+                    });
+                    if(!hasPerms){
+                        let embed = new EmbedBuilder()
+                            .setColor('#ff0000')
+                            .setTitle('PERMISOS INSUFICIENTES')
+                            .setDescription(`No tienes los permisos necesarios para ejecutar este comando.`)
+                            .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
+                        return message.channel.send({embeds: [embed]});
                     }
-                });
-                if(!hasPerms){
-                    let embed = new EmbedBuilder()
-                        .setColor('#ff0000')
-                        .setTitle('PERMISOS INSUFICIENTES')
-                        .setDescription(`No tienes los permisos necesarios para ejecutar este comando.`)
-                        .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
-                    return message.channel.send({embeds: [embed]});
                 }
             }
+            if(cmd.category === 'currency' && !g.currency) return;
+                cmd.execute(client, message, args, {
+                    BotProperties,
+                    Databases: { general, Shop, registers, ranks, robs },
+                    embed: EmbedBuilder,
+                    links,
+                    xl,
+                    cooldown,
+                    emojis
+                }).then(() => {})
+                .catch(err => console.log(err));
         }
-        if(cmd.category === 'currency' && !(await general.get(message.guild.id)).currency) return;
-            cmd.execute(client, message, args, {
-                BotProperties,
-                Databases: { general, Shop, registers, ranks, robs },
-                embed: EmbedBuilder,
-                links,
-                xl,
-                cooldown,
-                emojis
-            }).then(() => {})
-            .catch(err => console.log(err));
-    }
+    })
 })
 client.on('ready', async() => {
     const prefix = BotProperties.prefix;
