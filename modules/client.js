@@ -28,7 +28,7 @@ client.on('messageCreate', async (message) => {
     if(!general.has(message.guild.id)){
         general.set(message.guild.id, {});
     }
-    if(ranks.has(message.guild.id)){
+    if(!ranks.has(message.guild.id)){
         ranks.set(message.guild.id, {});
     }
     let guild2 = await ranks.get(message.guild.id);
