@@ -40,7 +40,7 @@ module.exports = {
                 .setFooter({ text: `página ${page}/${datas.length}`, iconURL: message.author.displayAvatarURL() });
             let description = '';
             for(let i = 0; i < data.length; i++){
-                description += `${i + 1} ${i+1 === 1 ? '🥇' : i+1 === 2 ? '🥈' : i+1 === 3 ? '🥉' : ''} ${data[i].user.tag} - ${data[i][type]}}\n`;
+                description += `${i + 1} ${i+1 === 1 ? '🥇' : i+1 === 2 ? '🥈' : i+1 === 3 ? '🥉' : ''} ${data[i].user.tag} \`${type.toUpperCase()}: ${data[i][type]}\`\n`;
             }
             embed.setDescription(description);
             return message.reply({ embeds: [embed] });
@@ -51,7 +51,7 @@ module.exports = {
                 .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
             let description = '';
             for(let i = 0; i < datas.length; i++){
-                description += `${i + 1} ${i+1 === 1 ? '🥇' : i+1 === 2 ? '🥈' : i+1 === 3 ? '🥉' : ''} ${datas[i].user.tag} - ${datas[i][type]}}\n`;
+                description += `${i + 1} ${i+1 === 1 ? '🥇' : i+1 === 2 ? '🥈' : i+1 === 3 ? '🥉' : ''} ${datas[i].user.tag} \`${type.toUpperCase()}: ${datas[i][type]}\`\n`;
             }
             embed.setDescription(description);
             return message.reply({ embeds: [embed] });
