@@ -28,7 +28,7 @@ class Database extends LibEvent {
     }
     async get(key, cb){
         this.#read().then(async data => {
-            cb(data[key]);
+            if(cb) cb(data[key]);
             return data[key];
         })
     }
@@ -43,7 +43,7 @@ class Database extends LibEvent {
     }
     async has(key, cb){
         let data = await this.#read();
-        cb(data[key]);
+        if(cb) cb(data[key]);
         if(data[key]) return true;
         return false;
     }
