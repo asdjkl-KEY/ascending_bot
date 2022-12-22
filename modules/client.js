@@ -33,6 +33,20 @@ client.on('messageCreate', async (message) => {
         ranks.set(message.guild.id, {});
     }
     let guild2 = await ranks.get(message.guild.id);
+    if(!guild2) {
+        await ranks.set(message.guild.id, {
+            [`${message.author.id}`] : {
+                level: 0,
+                xp: 0,
+                money: 0,
+                ballance: {
+                    bank: 0,
+                    wallet: 0
+                }
+            }
+        });
+        guild2 = await ranks.get(message.guild.id);
+    }
     if(!guild2[user.id]){
         guild2[user.id] = {
             level: 0,
