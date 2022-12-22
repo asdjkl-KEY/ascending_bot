@@ -11,7 +11,7 @@ module.exports = {
         // .addUserOption(option => option.setName('user').setDescription('USER_DESCRIPTION').setRequired(true)) // Opción de usuario.
         // .addStringOption(option => option.setName('reason').setDescription('REASON_DESCRIPTION').setRequired(true)), // Opción de texto.
     async execute(interaction, client, R){
-        let categories = ['admin', 'diversion', 'utils', 'owner'];
+        let categories = ['admin', 'diversion', 'utils', 'owner', 'currency'];
         let commands = {};
         categories.forEach(c => {
             let files = fs.readdirSync(path.join(__dirname, `../commands/${c}/`)).filter(f => f.endsWith('.js'));

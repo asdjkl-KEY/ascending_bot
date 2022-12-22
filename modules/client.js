@@ -17,6 +17,7 @@ let levels = [0, 100, 200, 500, 700, 1000, 1300, 1500, 1700, 2000, 2500, 2800, 3
 const ranks = new Database('ranks');
 let p = PermissionsBitField.Flags;
 const canvasWelcome = require('../helpers/canvasWelcome.js');
+const emojis = require('../helpers/emojis.js');
 
 client.on('messageCreate', async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
@@ -27,6 +28,24 @@ client.on('messageCreate', async (message) => {
     if(!general.has(message.guild.id)){
         general.set(message.guild.id, {});
     }
+    if(ranks.has(message.guild.id)){
+        ranks.set(message.guild.id, {});
+    }
+    let guild2 = await ranks.get(message.guild.id);
+    if(!guild2[user.id]){
+        guild2[user.id] = {
+            level: 0,
+            xp: 0,
+            money: 0,
+            ballance: {
+                bank: 0,
+                wallet: 0
+            } 
+        }
+        ranks.set(message.guild.id, guild2);
+    }
+    guild2[user.id].money = guild2[user.id].ballance.bank + guild2[user.id].ballance.wallet;
+    ranks.set(message.guild.id, guild2);
     let g = await general.get(message.guild.id);
     if(g['xpactived']){
         if(!ranks.has(message.guild.id)){
@@ -114,7 +133,8 @@ client.on('messageCreate', async (message) => {
                 embed: EmbedBuilder,
                 links,
                 xl,
-                cooldown
+                cooldown,
+                emojis
             }).then(() => {})
             .catch(err => console.log(err));
     }
@@ -146,7 +166,8 @@ client.on('interactionCreate', async (interaction) => {
             Databases: { general, Shop, registers, ranks },
             embed: EmbedBuilder,
             links,
-            cooldown
+            cooldown,
+            emojis
         });
     }
 });

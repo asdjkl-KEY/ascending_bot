@@ -18,7 +18,7 @@ module.exports = {
             .setColor('#00fc00')
             .setTitle(`Comando: ${cmd.name}`)
             .setDescription(`Descripción: ${cmd.description}\nUso: ${cmd.usage.replace('<prefix>', R.BotProperties.prefix)}\nCategoría: ${cmd.category}`)
-            .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
+            .setFooter({ text: `"<>" = obligatorio, "[]" = opcional`, iconURL: message.author.displayAvatarURL() });
         message.reply({ embeds: [embed] });
     }
 }
