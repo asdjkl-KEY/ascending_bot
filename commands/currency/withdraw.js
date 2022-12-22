@@ -19,6 +19,8 @@ module.exports = {
         if(!amount) return message.reply('Debes ingresar una cantidad a retirar.');
         if(amount > info.ballance.bank) return message.reply('No tienes esa cantidad de dinero en tu banco.');
         if(amount < 0) return message.reply('No puedes retirar una cantidad negativa.');
+        if(isNaN(amount && args[0] != 'all')) return message.reply('La cantidad debe ser un número.');
+        if(args[0] == 'all') amount = info.ballance.bank;
         info.ballance.wallet += amount;
         info.ballance.bank -= amount;
         guild[user.id] = info;

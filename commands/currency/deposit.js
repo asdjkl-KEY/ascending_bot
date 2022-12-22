@@ -17,9 +17,10 @@ module.exports = {
         let info = guild[user.id];
         let amount = parseInt(args[0]);
         if(!amount) return message.reply('Debes especificar una cantidad.');
-        if(isNaN(amount)) return message.reply('La cantidad debe ser un número.');
+        if(isNaN(amount) && args[0] != 'all') return message.reply('La cantidad debe ser un número.');
         if(amount < 0) return message.reply('La cantidad debe ser mayor a 0.');
         if(amount > info.ballance.wallet) return message.reply('No tienes suficiente dinero en tu cartera.');
+        if(args[0] == 'all') amount = info.ballance.wallet;
         if(amount > 1000000) return message.reply('No puedes depositar más de 1 millón de monedas.');
         info.ballance.wallet -= amount;
         info.ballance.bank += amount;
