@@ -18,25 +18,26 @@ module.exports = {
                 leaves: 0
             });
         }
-        let guild = await db.get(message.guild.id);
-        if(action === 'true'){
-            if(guild['leavesactived']){
-                return message.reply('El sistema de salidas ya está activado.');
+        db.get(message.guild.id).then(async guild => {
+            if(action === 'true'){
+                if(guild['leavesactived']){
+                    return message.reply('El sistema de salidas ya está activado.');
+                }
+                guild['leavesactived'] = true;
+                guild['leavesdate'] = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+                await db.set(message.guild.id, guild);
+                return message.reply(`El sistema de salidas ha sido activado :white_check_mark:\nse contará a partir de \`${guild['leavesdate']}\``);
             }
-            guild['leavesactived'] = true;
-            guild['leavesdate'] = `${new Date().getDate()}/${new Date().getMonth()}/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
-            await db.set(message.guild.id, guild);
-            return message.reply(`El sistema de salidas ha sido activado :white_check_mark:\nse contará a partir de \`${guild['leavesdate']}\``);
-        }
-        if(action === 'false'){
-            if(!guild['leavesactived']){
-                return message.reply('El sistema de salidas ya está desactivado.');
+            if(action === 'false'){
+                if(!guild['leavesactived']){
+                    return message.reply('El sistema de salidas ya está desactivado.');
+                }
+                guild['leavesactived'] = false;
+                guild['leavesdate'] = null
+                guild.leaves = 0;
+                await db.set(message.guild.id, guild);
+                return message.reply('El sistema de salidas ha sido desactivado :white_check_mark:');
             }
-            guild['leavesactived'] = false;
-            guild['leavesdate'] = null
-            guild.leaves = 0;
-            await db.set(message.guild.id, guild);
-            return message.reply('El sistema de salidas ha sido desactivado :white_check_mark:');
-        }
+        })
     }
 }

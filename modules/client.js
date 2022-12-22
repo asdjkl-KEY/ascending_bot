@@ -26,81 +26,67 @@ client.on('messageCreate', async (message) => {
     const user = message.author;
     if(message.author.bot || message.channel.type === 'DM') return;
     // XP SYSTEM
-    if(!general.has(message.guild.id)){
+    if(!await general.has(message.guild.id)){
         await general.set(message.guild.id, {});
     }
-    if(!ranks.has(message.guild.id)){
+    if(!await ranks.has(message.guild.id)){
         await ranks.set(message.guild.id, {});
     }
-    let guild2 = await ranks.get(message.guild.id);
-    if(!guild2) {
-        await ranks.set(message.guild.id, {
-            [`${message.author.id}`] : {
+    ranks.get(message.guild.id).then(async guild2 => {
+        if(!guild2[user.id]){
+            guild2[user.id] = {
                 level: 0,
                 xp: 0,
                 money: 0,
                 ballance: {
                     bank: 0,
                     wallet: 0
+                } 
+            }
+            await ranks.set(message.guild.id, guild2);
+        }
+    })
+    
+    general.get(message.guild.id).then(async g => {
+        if(g['xpactived']){
+            await ranks.get(message.guild.id).then(async guild => {
+                if(!guild[user.id]){
+                    guild[user.id] = {
+                        level: 0,
+                        xp: 0
+                    }
+                    await ranks.set(message.guild.id, guild);
                 }
-            }
-        });
-        guild2 = await ranks.get(message.guild.id);
-    }
-    if(!guild2[user.id]){
-        guild2[user.id] = {
-            level: 0,
-            xp: 0,
-            money: 0,
-            ballance: {
-                bank: 0,
-                wallet: 0
-            } 
-        }
-        await ranks.set(message.guild.id, guild2);
-    }
-    guild2[user.id].money = guild2[user.id].ballance.bank + guild2[user.id].ballance.wallet;
-    await ranks.set(message.guild.id, guild2);
-    let g = await general.get(message.guild.id);
-    if(g['xpactived']){
-        if(!ranks.has(message.guild.id)){
-            await ranks.set(message.guild.id, {});
-        }
-        let guild = await ranks.get(message.guild.id);
-        if(!guild[user.id]){
-            guild[user.id] = {
-                level: 0,
-                xp: 0
-            }
-            awaitranks.set(message.guild.id, guild);
-        }
-        let xp = message.content.length;
-        let finalXP = Math.floor(Math.random() * xp/10 * 7);
-        guild[user.id] = {
-            level: guild[user.id].level,
-            xp: guild[user.id].xp + finalXP
-        }
-        if(guild[user.id].xp >= levels[guild[user.id].level + 1]){
-            guild[user.id] = {
-                level: guild[user.id].level + 1,
-                xp: guild[user.id].xp - levels[guild[user.id].level]
-            }
-        }
-        await ranks.set(message.guild.id, guild);
-        if(g['logslevel']){
-            let channel = client.channels.cache.get(g['logslevel']);
-            if(channel){
-                let embed = new EmbedBuilder()
-                    .setColor('#ff0000')
-                    .setTitle('LEVEL UP!')
-                    .setDescription(`El usuario ${user} ha subido de nivel.`)
-                    .addField('Nivel anterior:', guild[user.id].level - 1)
-                    .addField('Nivel actual:', guild[user.id].level)
-                    .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
-                channel.send({embeds: [embed]});
-            }
-        }
-    } //end xp system
+                let xp = message.content.length;
+                let finalXP = Math.floor(Math.random() * xp/10 * 7);
+                guild[user.id] = {
+                    level: guild[user.id].level,
+                    xp: guild[user.id].xp + finalXP
+                }
+                if(guild[user.id].xp >= levels[guild[user.id].level + 1]){
+                    guild[user.id] = {
+                        level: guild[user.id].level + 1,
+                        xp: guild[user.id].xp - levels[guild[user.id].level]
+                    }
+                }
+                await ranks.set(message.guild.id, guild);
+                if(g['logslevel']){
+                    let channel = client.channels.cache.get(g['logslevel']);
+                    if(channel){
+                        let embed = new EmbedBuilder()
+                            .setColor('#ff0000')
+                            .setTitle('LEVEL UP!')
+                            .setDescription(`El usuario ${user} ha subido de nivel.`)
+                            .addField('Nivel anterior:', guild[user.id].level - 1)
+                            .addField('Nivel actual:', guild[user.id].level)
+                            .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() });
+                        channel.send({embeds: [embed]});
+                    }
+                }
+            })
+            
+        } //end xp system
+    })
     if(!message.content.trim().startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();

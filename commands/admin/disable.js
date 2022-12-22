@@ -12,11 +12,12 @@ module.exports = {
     async execute(client, message, args, R){
         let func = args[0];
         if(!func) return message.reply('Debes especificar una función.');
-        let guild = await R.Databases.general.get(message.guild.id);
-        if(func === 'nocomands'){
-            guild.nocomands = true;
-            await R.Databases.general.set(message.guild.id, guild);
-            return message.reply('La función \`Comando Inexistente\` ha sido desabilitada.');
-        }
+        R.Databases.general.get(message.guild.id).then(async guild => {
+            if(func === 'nocomands'){
+                guild.nocomands = true;
+                await R.Databases.general.set(message.guild.id, guild);
+                return message.reply('La función \`Comando Inexistente\` ha sido desabilitada.');
+            }
+        })
     }
 }

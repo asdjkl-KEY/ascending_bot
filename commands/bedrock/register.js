@@ -12,12 +12,12 @@ module.exports = {
         if(await db.has(message.author.id)) return message.reply('Ya estás registrado en el Realm.');
         let gamertag = args.join(' ');
         if(!gamertag) return message.reply('Escribe tu gamertag.');
-        xl.people.find(gamertag, 1).then(res => {
+        xl.people.find(gamertag, 1).then(async res => {
             if(res.people.length === 0){
                 message.reply("Tal parece que el gamertag escrito no existe!")
             } else {
                 const user = res.people[0];
-                db.set(message.author.id, {
+                await db.set(message.author.id, {
                     gamertag: user.gamertag,
                     xuid: user.xuid,
                     avatar: user.avatar ? user.avatar : user.displayPicRaw

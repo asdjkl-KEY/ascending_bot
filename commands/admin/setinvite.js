@@ -19,12 +19,13 @@ module.exports = {
         }
         if(!types.includes(type)) return message.reply('El tipo de bienvenida debe ser embed o canvas.');
         let db = R.Databases.general;
-        let guild = await db.get(message.guild.id);
-        guild.welcome = {
-            id: channel.id,
-            type: type
-        };
-        await db.set(message.guild.id, guild);
-        message.reply(`El canal de bienvenidas se ha establecido en ${channel}.`);
+        db.get(message.guild.id).then(async guild => {
+            guild.welcome = {
+                id: channel.id,
+                type: type
+            };
+            await db.set(message.guild.id, guild);
+            message.reply(`El canal de bienvenidas se ha establecido en ${channel}.`);
+        });
     }
 }

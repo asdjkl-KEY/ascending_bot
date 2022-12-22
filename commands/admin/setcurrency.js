@@ -13,10 +13,11 @@ module.exports = {
         let channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]);
         if(!channel) return message.reply('Debes mencionar un canal o poner su id.');
         let db = R.Databases.general;
-        let guild = await db.get(message.guild.id);
-        if(!guild) guild = {};
-        guild.currency = channel.id;
-        await db.set(message.guild.id, guild);
-        return message.reply(`El canal de economia del servidor ha sido establecido en ${channel}.`);
+        db.get(message.guild.id).then(async guild => {
+            if(!guild) guild = {};
+            guild.currency = channel.id;
+            await db.set(message.guild.id, guild);
+            return message.reply(`El canal de economia del servidor ha sido establecido en ${channel}.`);
+        });
     }
 }

@@ -60,10 +60,11 @@ module.exports = {
         if(!type) return message.reply('Debes especificar un tipo de log. Los tipos de logs son: `message`, `member`, `role`, `channel`, `guild`, `ban`');
         if(!types.includes(type)) return message.reply('Debes especificar un tipo de log válido. Los tipos de logs son: `message`, `member`, `role`, `channel`, `guild`, `ban`');
         if(await db.has(message.guild.id)){
-            let data = await db.get(message.guild.id);
-            data[type] = channel.id;
-            await db.set(message.guild.id, data);
-            return message.reply(`El canal de logs de \`${type}\` ha sido establecido en ${channel}.`);
+            db.get(message.guild.id).then(async data => {
+                data[type] = channel.id;
+                await db.set(message.guild.id, data);
+                return message.reply(`El canal de logs de \`${type}\` ha sido establecido en ${channel}.`);
+            })
         } else {
             let data = {
                 message: null,

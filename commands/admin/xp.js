@@ -12,22 +12,23 @@ module.exports = {
     async execute(client, message, args, R){
         let action = args[0];
         if(!action) return message.reply('Debes especificar una acción.');
-        let guild = await R.Databases.general.get(message.guild.id);
-        if(action === 'on'){
-            if(guild['xpactived']){
-                return message.reply('El sistema de xp ya está activado.');
+        R.Databases.general.get(message.guild.id).then(async guild => {
+            if(action === 'on'){
+                if(guild['xpactived']){
+                    return message.reply('El sistema de xp ya está activado.');
+                }
+                guild['xpactived'] = true;
+                await R.Databases.general.set(message.guild.id, guild);
+                return message.reply('El sistema de xp ha sido activado.');
             }
-            guild['xpactived'] = true;
-            await R.Databases.general.set(message.guild.id, guild);
-            return message.reply('El sistema de xp ha sido activado.');
-        }
-        if(action === 'off'){
-            if(!guild['xpactived']){
-                return message.reply('El sistema de xp ya está desactivado.');
+            if(action === 'off'){
+                if(!guild['xpactived']){
+                    return message.reply('El sistema de xp ya está desactivado.');
+                }
+                guild['xpactived'] = false;
+                await R.Databases.general.set(message.guild.id, guild);
+                return message.reply('El sistema de xp ha sido desactivado.');
             }
-            guild['xpactived'] = false;
-            await R.Databases.general.set(message.guild.id, guild);
-            return message.reply('El sistema de xp ha sido desactivado.');
-        }
+        })
     }
 }
