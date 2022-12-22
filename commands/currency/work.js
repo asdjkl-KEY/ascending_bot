@@ -95,7 +95,7 @@ module.exports = {
                 }
             })
         }
-        let quantity = Math.floor(Math.random() * (info.salary[1] - 500)) + info.salary[0];
+        let quantity = Math.floor(Math.random() * (info.work.salary[1] - 500)) + info.work.salary[0];
         let trabajos = {
             minero: [
                 `Has trabajado como un negro en la mina y has ganado **${quantity}**${e.coin}`,
