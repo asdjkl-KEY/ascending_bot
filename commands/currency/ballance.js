@@ -13,7 +13,7 @@ module.exports = {
         let db = R.Databases.ranks;
         let e = R.emojis;
         let user = message.mentions.users.first() || message.author;
-        if(user.bot || user.user.bot) return message.reply('Los bots no tienen dinero.');
+        if(user.bot) return message.reply('Los bots no tienen dinero.');
         let guild = await db.get(message.guild.id);
         if(!guild) return message.reply('No hay datos para mostrar.');
         if(Object.keys(guild). length === 0) return message.reply('No hay datos para mostrar.');

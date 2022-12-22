@@ -14,7 +14,7 @@ module.exports = {
         let victim = message.mentions.users.first();
         if(!victim) return message.reply('Debes mencionar a un usuario.');
         if(victim.id === user.id) return message.reply('No puedes robarte a ti mismo.');
-        if(victim.user.bot || victim.bot) return message.reply('No puedes robar a un bot.');
+        if(victim.bot) return message.reply('No puedes robar a un bot.');
         let e = R.emojis;
         let db = R.Databases.ranks;
         let guild = await db.get(message.guild.id);

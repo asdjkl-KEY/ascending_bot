@@ -16,7 +16,7 @@ module.exports = {
         let e = R.emojis;
         let guild = await db.get(message.guild.id);
         if(!payed) return message.reply('Debes mencionar a un usuario.');
-        if(payed.bot || payed.user.bot) return message.reply('No puedes pagar a un bot.');
+        if(payed.bot) return message.reply('No puedes pagar a un bot.');
         if(payed.id === user.id) return message.reply('No puedes pagarte a ti mismo.');
         let amount = parseInt(args[1]);
         if(!amount) return message.reply('Debes ingresar una cantidad a pagar.');
