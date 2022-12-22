@@ -45,7 +45,7 @@ module.exports = {
             ${e.ladron}: Ladrón \`(Nunca falla los robos + -30% cooldown en el comando rob)\`
             `)
             .setColor('#fcfc00')
-            .setFooter('Tienes 3 minutos para seleccionar un trabajo')
+            .setFooter({text: 'Selecciona un trabajo en 3 minutos.'})
             let msg = await message.reply({embeds: [embed]});
             await msg.react(e.doctor);
             await msg.react(e.pica);
