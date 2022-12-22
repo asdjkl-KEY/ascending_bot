@@ -24,7 +24,7 @@ module.exports = {
         // Aquí el código del comando.
         let description = '';
         Object.keys(commands).forEach(k => {
-            description += `**${k}**\n${commands[k].join(', ')}\n\n`;
+            description += `\`${k}\`\n`;
         })
         let rowoptions = [];
         Object.keys(commands).forEach(k => {
@@ -40,7 +40,8 @@ module.exports = {
         const embed = new R.embed()
         .setTitle('Comandos')
         .setDescription(`
-        Comandos del bot.
+        **Categorías de comandos del bot:**
+
         ${description}
         `)
         .setColor("#fafa00")
