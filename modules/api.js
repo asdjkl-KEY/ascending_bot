@@ -50,6 +50,17 @@ class Database extends LibEvent {
         });
         return;
     }
+    has(key){
+        (async () => {
+            let data = await this.#read();
+            if(data[key]) return true;
+            return false;
+        })().then(res => {
+            return res;
+        }).catch(err => {
+            this.emit('error', err);
+        })
+    }
 }
 
 module.exports = { Database };
