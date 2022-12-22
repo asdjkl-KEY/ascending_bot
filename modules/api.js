@@ -27,10 +27,9 @@ class Database extends LibEvent {
         return data.data;
     }
     async get(key, cb){
-        return this.#read().then(async data => {
-            if(cb) cb(data[key]);
-            return data[key];
-        });
+        let data = await this.#read();
+        if(cb) cb(data[key]);
+        return data[key];
     }
     async set(key, value){
         await axios.post(this.url + '/set', {
