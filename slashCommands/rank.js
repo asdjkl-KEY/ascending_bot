@@ -22,11 +22,11 @@ module.exports = {
         let g = await R.Databases.general.get(interaction.guild.id);
         if(!g || !g['xpactived']) return interaction.reply({ content: 'El sistema de xp no está activado en este servidor. Usa `!xp on` para activarlo.', ephemeral: true });
         const user = interaction.options.getUser('usuario') || interaction.user;
-        if(!ranks.has(interaction.guild.id)){
-            ranks.set(interaction.guild.id, {});
+        if(!await ranks.has(interaction.guild.id)){
+            await ranks.set(interaction.guild.id, {});
         }
-        if(!ranks.has(interaction.guild.id)){
-            ranks.set(interaction.guild.id, {});
+        if(!await ranks.has(interaction.guild.id)){
+            await ranks.set(interaction.guild.id, {});
         }
         let guild = await ranks.get(interaction.guild.id);
         if(!guild[user.id]){
@@ -34,7 +34,7 @@ module.exports = {
                 xp: 0,
                 level: 0
             }
-            ranks.set(interaction.guild.id, guild);
+            await ranks.set(interaction.guild.id, guild);
         }
         //set the background
         let background = await loadImage(R.links.bg[3]);

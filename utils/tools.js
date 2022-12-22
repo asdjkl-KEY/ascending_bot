@@ -1,4 +1,4 @@
-const { Database } = require('jesscode-lib');
+const { Database } = require('../modules/api.js');
 const parseTime = require('parse-ms-2');
 const db = new Database('cooldown');
 let cooldown;
@@ -7,11 +7,11 @@ async function set(user, cmd, cd){
     let cool = await db.get(user.id);
     if(cool){
         cool[cmd] = Date.now() + cd * 1000;
-        db.set(user.id, cool);
+        await db.set(user.id, cool);
     } else {
         cool = {};
         cool[cmd] = Date.now() + cd * 1000;
-        db.set(user.id, cool);
+        await db.set(user.id, cool);
     }
 }
 async function has(user, cmd){

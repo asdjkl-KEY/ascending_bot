@@ -11,14 +11,14 @@ module.exports = {
     usage: '<prefix> membercount',
     async execute(client, message, args, R){
         let db = R.Databases.general;
-        if(!db.has(message.guild.id)){
-            db.set(message.guild.id, {
+        if(!await db.has(message.guild.id)){
+            await db.set(message.guild.id, {
                 leaves: 0
             });
         } else {
             let guild = await db.get(message.guild.id);
             if(!guild.leaves) guild.leaves = 0;
-            db.set(message.guild.id, guild);
+            await db.set(message.guild.id, guild);
         }
         let guild = await db.get(message.guild.id);
         // console.log(message.guild.members.cache.size+ "\n\n"+ await message.guild.members.fetch())

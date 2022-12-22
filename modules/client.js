@@ -27,10 +27,10 @@ client.on('messageCreate', async (message) => {
     if(message.author.bot || message.channel.type === 'DM') return;
     // XP SYSTEM
     if(!general.has(message.guild.id)){
-        general.set(message.guild.id, {});
+        await general.set(message.guild.id, {});
     }
     if(!ranks.has(message.guild.id)){
-        ranks.set(message.guild.id, {});
+        await ranks.set(message.guild.id, {});
     }
     let guild2 = await ranks.get(message.guild.id);
     if(!guild2) {
@@ -57,14 +57,14 @@ client.on('messageCreate', async (message) => {
                 wallet: 0
             } 
         }
-        ranks.set(message.guild.id, guild2);
+        await ranks.set(message.guild.id, guild2);
     }
     guild2[user.id].money = guild2[user.id].ballance.bank + guild2[user.id].ballance.wallet;
-    ranks.set(message.guild.id, guild2);
+    await ranks.set(message.guild.id, guild2);
     let g = await general.get(message.guild.id);
     if(g['xpactived']){
         if(!ranks.has(message.guild.id)){
-            ranks.set(message.guild.id, {});
+            await ranks.set(message.guild.id, {});
         }
         let guild = await ranks.get(message.guild.id);
         if(!guild[user.id]){
@@ -72,7 +72,7 @@ client.on('messageCreate', async (message) => {
                 level: 0,
                 xp: 0
             }
-            ranks.set(message.guild.id, guild);
+            awaitranks.set(message.guild.id, guild);
         }
         let xp = message.content.length;
         let finalXP = Math.floor(Math.random() * xp/10 * 7);
@@ -86,7 +86,7 @@ client.on('messageCreate', async (message) => {
                 xp: guild[user.id].xp - levels[guild[user.id].level]
             }
         }
-        ranks.set(message.guild.id, guild);
+        await ranks.set(message.guild.id, guild);
         if(g['logslevel']){
             let channel = client.channels.cache.get(g['logslevel']);
             if(channel){
@@ -198,7 +198,7 @@ client.on(Events.GuildMemberRemove, async member => {
             }
         }
     } else {
-        general.set(member.guild.id, {
+        await general.set(member.guild.id, {
             leavesactived: false,
             leaves: 0
         })
@@ -207,7 +207,7 @@ client.on(Events.GuildMemberRemove, async member => {
 client.on(Events.GuildMemberAdd, async member => {
     let g = await general.get(member.guild.id);
     if(!g){
-        general.set(member.guild.id, {})
+        await general.set(member.guild.id, {})
     }
     if(g){
         if(g.welcome){

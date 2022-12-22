@@ -15,7 +15,7 @@ module.exports = {
         let guild = await R.Databases.general.get(message.guild.id);
         if(func === 'nocomands'){
             guild.nocomands = true;
-            R.Databases.general.set(message.guild.id, guild);
+            await R.Databases.general.set(message.guild.id, guild);
             return message.reply('La función \`Comando Inexistente\` ha sido desabilitada.');
         }
     }

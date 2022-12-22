@@ -9,7 +9,7 @@ module.exports = {
     async execute(client, message, args, R){
         const xl = R.xl;
         const db = R.Databases.registers;
-        if(db.has(message.author.id)) return message.reply('Ya estás registrado en el Realm.');
+        if(await db.has(message.author.id)) return message.reply('Ya estás registrado en el Realm.');
         let gamertag = args.join(' ');
         if(!gamertag) return message.reply('Escribe tu gamertag.');
         xl.people.find(gamertag, 1).then(res => {

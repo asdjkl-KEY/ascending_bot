@@ -5,9 +5,9 @@ class Database extends LibEvent {
         super();
         this.name = name;
         this.url = process.env['DATABASE_URL'];
-        this.#create();
+        (async () => {await this.#create();})().then(() => {});
     }
-    #create(){
+    async #create(){
         axios.post(this.url + '/create', {
             name: this.name,
             password: process.env['PASSWORD']
@@ -20,47 +20,29 @@ class Database extends LibEvent {
         return;
     }
     async #read(){
-        let data = {};
-        axios.post(this.url + '/read', {
+        let data = await axios.post(this.url + '/read', {
             name: this.name,
             password: process.env['PASSWORD']
-        }).then(res => {
-            if(res.data.state === 'read'){
-                data = res.data.data;
-                this.emit('read');
-            }
-        }).catch(err => {
-            this.emit('error', err);
         });
-        return data;
+        return data.data;
     }
     async get(key){
         let data = await this.#read();
         return data[key];
     }
     async set(key, value){
-        axios.post(this.url + '/set', {
+        await axios.post(this.url + '/set', {
             name: this.name,
             password: process.env['PASSWORD'],
             key: key,
             value: value
-        }).then(res => {
-            if(res.data.state === 'set') this.emit('set');
-        }).catch(err => {
-            this.emit('error', err);
-        });
+        })
         return;
     }
-    has(key){
-        (async () => {
-            let data = await this.#read();
-            if(data[key]) return true;
-            return false;
-        })().then(res => {
-            return res;
-        }).catch(err => {
-            this.emit('error', err);
-        })
+    async has(key){
+        let data = await this.#read();
+        if(data[key]) return true;
+        return false;
     }
 }
 

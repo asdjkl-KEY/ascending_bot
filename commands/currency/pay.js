@@ -32,7 +32,7 @@ module.exports = {
         info2.ballance.wallet += amount;
         guild[user.id] = info;
         guild[payed.id] = info2;
-        db.set(message.guild.id, guild);
+        await db.set(message.guild.id, guild);
         let embed = new R.embed()
             .setColor('#00fc00')
             .setTitle(`💰 Pagar 💰`)

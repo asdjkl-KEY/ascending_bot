@@ -25,7 +25,7 @@ module.exports = {
         info.ballance.wallet -= amount;
         info.ballance.bank += amount;
         guild[user.id] = info;
-        db.set(message.guild.id, guild);
+        await db.set(message.guild.id, guild);
         let embed = new R.embed()
             .setColor('#00fc00')
             .setTitle(`💰 Deposito 💰`)

@@ -20,7 +20,7 @@ module.exports = {
         info.ballance.wallet += 1000;
         info.money += 1000;
         guild[user.id] = info;
-        db.set(message.guild.id, guild);
+        await db.set(message.guild.id, guild);
         await cooldown.set(user, 'daily', 3600 * 24);
         let embed = new R.embed()
             .setColor('#00fc00')

@@ -196,7 +196,7 @@ module.exports = {
                 info.ballance.wallet += extra;
             }
             guild[message.author.id] = info;
-            db.set(message.guild.id, guild);
+            await db.set(message.guild.id, guild);
             message.reply({ embeds: [embed] })
             await cooldown.set(message.author, 'work', info.work.current === 'bombero' ? (18 * 60) : 3600);
     }

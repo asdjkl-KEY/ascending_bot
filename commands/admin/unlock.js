@@ -23,7 +23,7 @@ module.exports = {
         if(guild.lock.includes(message.channel.id)){
             guild.lock.splice(guild.lock.indexOf(message.channel.id), 1);
         }
-        R.Databases.general.set(message.guild.id, guild);
+        await R.Databases.general.set(message.guild.id, guild);
         let channel = message.channel;
         //remove permission for everyone
         channel.permissionOverwrites.edit(message.guild.roles.everyone, {

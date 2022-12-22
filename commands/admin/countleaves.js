@@ -13,8 +13,8 @@ module.exports = {
         let action = args[0];
         if(!action) return message.reply('Debes especificar una acción.');
         let db = R.Databases.general;
-        if(!db.has(message.guild.id)){
-            db.set(message.guild.id, {
+        if(!await db.has(message.guild.id)){
+            await db.set(message.guild.id, {
                 leaves: 0
             });
         }

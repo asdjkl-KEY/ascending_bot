@@ -39,8 +39,8 @@ module.exports = {
             guild[rob.user] = robber;
         })
         await cooldown.set(user, 'capture', 3600);
-        r.set(message.guild.id, []);
+        await r.set(message.guild.id, []);
         guild[user.id] = info;
-        db.set(message.guild.id, guild);
+        await db.set(message.guild.id, guild);
     }
 }
