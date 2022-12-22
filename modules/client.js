@@ -25,13 +25,18 @@ client.on('messageCreate', async (message) => {
     const prefix = BotProperties.prefix;
     const user = message.author;
     if(message.author.bot || message.channel.type === 'DM') return;
-    // XP SYSTEM
-    if(!await general.has(message.guild.id)){
-        await general.set(message.guild.id, {});
-    }
-    if(!await ranks.has(message.guild.id)){
-        await ranks.set(message.guild.id, {});
-    }
+    ranks.get(message.guild.id).then(async guild => {
+        if(!guild){
+            guild= {};
+            await ranks.set(message.guild.id, guild);
+        }
+    });
+    general.get(message.guild.id).then(async g => {
+        if(!g){
+            g = {};
+            await general.set(message.guild.id, g);
+        }
+    });
     ranks.get(message.guild.id).then(async guild2 => {
         if(!guild2[user.id]){
             guild2[user.id] = {
