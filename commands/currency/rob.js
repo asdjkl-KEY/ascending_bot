@@ -12,6 +12,9 @@ module.exports = {
     async execute(client, message, args, R){
         let user = message.author;
         let cooldown = R.cooldown;
+        let r = R.Databases.robs;
+        let robs = await r.get(message.guild.id);
+        if(!robs) robs = [];
         if(await cooldown.has(user, 'rob')) return message.reply(`Debes esperar **${await cooldown.get(user, 'rob')}** para usar este comando.`);
         let victim = message.mentions.users.first();
         if(!victim) return message.reply('Debes mencionar a un usuario.');
@@ -21,6 +24,17 @@ module.exports = {
         let db = R.Databases.ranks;
         let guild = await db.get(message.guild.id);
         let info = guild[user.id];
+        if(!info.work){
+            let embed = new R.embed()
+                .setColor('#ff0000')
+                .setTitle(`💰 Robar 💰`)
+                .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL() })
+                .setDescription(`
+                No puedes robar a nadie si no tienes trabajo.
+                usa !work para conseguir uno.
+                `)
+            return message.reply({embeds: [embed]})
+        }
         let victimInfo = guild[victim.id];
         if(!victimInfo) return message.reply('El usuario al que quieres robar no tiene perfil.');
         let quantity = Math.floor(Math.random() * victimInfo.ballance.wallet);
@@ -45,6 +59,7 @@ module.exports = {
             `Has amenazado a ${victim} y te ha dado **${quantity}**${e.coin} para que lo dejes vivir. Pero era familia de mafiosos, te han pillado y tuviste que pagar **${quantity}**${e.coin} para que te dejaran vivir.`
         ];
         let probability = Math.floor(Math.random() * 100);
+        if(info.work.current === 'ladron') probability = 100;
         if(probability >= 35){
             victimInfo.ballance.wallet -= quantity;
             info.ballance.wallet += quantity;
@@ -56,6 +71,12 @@ module.exports = {
         guild[user.id] = info;
         guild[victim.id] = victimInfo;
         await db.set(message.guild.id, guild);
-        await cooldown.set(user, 'rob', 3600);
+        robs.push({
+            user: user.id,
+            victim: victim.id,
+            quantity: quantity,
+            validad: Date.now() + 30000
+        });
+        await cooldown.set(user, 'rob', info.work.current === 'ladron' ? (18 * 60) : 3600);
     }
 }

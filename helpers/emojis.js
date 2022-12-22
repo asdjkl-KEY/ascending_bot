@@ -4,5 +4,11 @@ module.exports = {
     gold_ore: '<:mineral_oro:873572863020503120>',
     wallet: '<:wallet:1055468398009655346>',
     bank: '🏦',
-    moneybag: '💰'
+    moneybag: '💰',
+    pica: '<:pica_comun:873587586617200700>',
+    doctor: '🩺',
+    bombero: '🚒',
+    constructor: '🏗️',
+    policia: '👮',
+    ladron: '<:ladron:1055557920584114287>'
 }

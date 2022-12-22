@@ -18,6 +18,7 @@ const ranks = new Database('ranks');
 let p = PermissionsBitField.Flags;
 const canvasWelcome = require('../helpers/canvasWelcome.js');
 const emojis = require('../helpers/emojis.js');
+const robs = new Database('robs');
 
 client.on('messageCreate', async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
@@ -127,9 +128,10 @@ client.on('messageCreate', async (message) => {
                 }
             }
         }
+        if(cmd.category === 'currency' && !g.currency) return;
             cmd.execute(client, message, args, {
                 BotProperties,
-                Databases: { general, Shop, registers, ranks },
+                Databases: { general, Shop, registers, ranks, robs },
                 embed: EmbedBuilder,
                 links,
                 xl,
@@ -163,7 +165,7 @@ client.on('interactionCreate', async (interaction) => {
         }
         command.execute(interaction, client, {
             BotProperties,
-            Databases: { general, Shop, registers, ranks },
+            Databases: { general, Shop, registers, ranks, robs },
             embed: EmbedBuilder,
             links,
             cooldown,
