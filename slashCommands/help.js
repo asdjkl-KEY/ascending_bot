@@ -67,5 +67,11 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL());
             i.update({embeds: [embed]});
         });
+        //trigger change menu
+        collector.on('end', async collected => {
+            let embed = collected.first().message.embeds[0];
+            embed.setFooter({text: "Tiempo de espera agotado."});
+            collected.first().update({embeds: [embed]});
+        })
     }
 }
