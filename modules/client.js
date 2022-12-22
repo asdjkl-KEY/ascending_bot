@@ -110,7 +110,7 @@ client.on('messageCreate', async (message) => {
         }
             cmd.execute(client, message, args, {
                 BotProperties,
-                Databases: { general, Shop, registers },
+                Databases: { general, Shop, registers, ranks },
                 embed: EmbedBuilder,
                 links,
                 xl,
@@ -143,7 +143,7 @@ client.on('interactionCreate', async (interaction) => {
         }
         command.execute(interaction, client, {
             BotProperties,
-            Databases: { general, Shop, registers },
+            Databases: { general, Shop, registers, ranks },
             embed: EmbedBuilder,
             links,
             cooldown
