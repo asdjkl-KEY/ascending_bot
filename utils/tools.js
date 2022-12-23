@@ -1,4 +1,4 @@
-const { Database } = require('../modules/api.js');
+const { Database } = require('jesscode-lib');
 const parseTime = require('parse-ms-2');
 const db = new Database('cooldown');
 let cooldown;

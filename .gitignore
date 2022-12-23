@@ -1,5 +1,4 @@
 /node_modules
-/databases
 .env
 package-lock.json
 .AddCompLib/

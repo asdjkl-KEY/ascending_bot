@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, messageLink } = require('discord.js');
-const { Database } = require('../modules/api.js');
+const { Database } = require('jesscode-lib');
 const ranks = new Database('ranks');
 const path = require('path');
 const fs = require('fs');
