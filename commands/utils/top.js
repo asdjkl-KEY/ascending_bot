@@ -12,7 +12,7 @@ module.exports = {
     async execute(client, message, args, R){
         let type = args[0];
         let page = args[1] || 1;
-        let types = ['xp', 'level'];
+        let types = ['xp', 'level', 'money'];
         if(!type) type = 'xp';
         if(!types.includes(type)) return message.reply('El tipo de top no es válido.');
         let db = R.Databases.ranks;
@@ -30,6 +30,7 @@ module.exports = {
                 datas.push(guild[usersId[i]]);
             }
             if(datas.length === 0) return message.reply('No hay datos para mostrar.');
+            datas.sort((a, b) => (type === 'money' ? (b.ballace.wallet + b.ballance.bank) : b[type]) - (type === 'money' ? (a.ballance.wallet + a.ballace.bank) : a[type]));
             if(datas.length > 10){
                 let pages = Math.ceil(datas.length / 10);
                 if(page > pages) return message.reply('La página no existe.');
