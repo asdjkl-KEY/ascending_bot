@@ -101,7 +101,7 @@ module.exports = {
             }
             let quantity = Math.floor(Math.random() * (info.work.salary[1] - 500)) + info.work.salary[0];
             let trabajos = {
-                minero: [
+                'minero': [
                     `Has trabajado como un negro en la mina y has ganado **${quantity}**${e.coin}`,
                     `Hoy ha sido un buen día hubo bastante mineral y has ganado **${quantity}**${e.coin}`,
                     `Eres un buen minero y has ganado **${quantity}**${e.coin}`,
@@ -110,7 +110,7 @@ module.exports = {
                     `Eres uno de los pocos que sabe trabajar en la mina por eso hoy ganas **${quantity}**${e.coin}`,
                     `Te consideran el prota de la mina y te han pagado **${quantity}**${e.coin}`
                 ],
-                doctor: [
+                'doctor': [
                     `Hoy has tenido que atender a un paciente con coronavirus y has ganado **${quantity}**${e.coin}`,
                     `Hoy has tenido que atender a un paciente con covid y has ganado **${quantity}**${e.coin}`,
                     `Hoy has tenido que atender a un paciente con covid-19 y has ganado **${quantity}**${e.coin}`,
@@ -119,7 +119,7 @@ module.exports = {
                     `Tu esfuerzos han sido recompensados y has ganado **${quantity}**${e.coin}`,
                     `Empiezas a ganar reputación, hoy te pagaron **${quantity}**${e.coin}`
                 ],
-                bombero: [
+                'bombero': [
                     `Hoy has tenido que apagar un incendio y has ganado **${quantity}**${e.coin}`,
                     `Hoy has tenido que apagar un incendio en una casa y has ganado **${quantity}**${e.coin}`,
                     `Hoy has tenido que apagar un incendio en un edificio y has ganado **${quantity}**${e.coin}`,
@@ -130,7 +130,7 @@ module.exports = {
                     `Tus esfuerzos han sido recompensados y has ganado **${quantity}**${e.coin}`,
                     `Empiezas a ganar reputación, hoy te pagaron **${quantity}**${e.coin}`
                 ],
-                policia: [
+                'policia': [
                     `Hoy has tenido que detener a un ladrón y has ganado **${quantity}**${e.coin}`,
                     `Te han encomendado el arresto de un criminal y te pagaron **${quantity}**${e.coin}`,
                     `Has pillado a un ladrón en un banco y has ganado **${quantity}**${e.coin}`,
@@ -141,7 +141,7 @@ module.exports = {
                     `El mejor detective!! Has atrapado a un asesino y te han pagado **${quantity}**${e.coin}`,
                     `Has resuelto un caso imposible y te han pagado **${quantity}**${e.coin}`
                 ],
-                constructor: [
+                'constructor': [
                     `Hoy has tenido que construir una casa y has ganado **${quantity}**${e.coin}`,
                     `Hoy fuiste a trabajar al edificio en construcción y has ganado **${quantity}**${e.coin}`,
                     `El trabajo es un poco duro pero has ganado **${quantity}**${e.coin}`,
@@ -152,7 +152,7 @@ module.exports = {
                     `Tus esfuerzos han sido recompensados y has ganado **${quantity}**${e.coin}`,
                     `Empiezas a ganar reputación, hoy te pagaron **${quantity}**${e.coin}`
                 ],
-                ladron: [
+                'ladron': [
                     `Hoy has robado un banco y has ganado **${quantity}**${e.coin}`,
                     `Hoy no había casi guardias, los has dejado dormidos y has robado **${quantity}**${e.coin}`,
                     `Robaste a una anciana en la calle y su cartera tenía **${quantity}**${e.coin}`,
