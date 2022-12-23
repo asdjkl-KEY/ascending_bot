@@ -162,6 +162,7 @@ module.exports = {
                     `Ladrón que roba a ladrón tiene 100 años de perdón, has robado a otro ladrón**${quantity}**${e.coin}`
                 ]
             }
+            console.log(info.work.current);
             let job = trabajos[info.work.current][Math.floor(Math.random() * trabajos[info.work.current].length)];
             let embed = new R.embed()
                 .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
