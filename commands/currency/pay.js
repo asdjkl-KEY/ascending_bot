@@ -18,7 +18,7 @@ module.exports = {
             if(!payed) return message.reply('Debes mencionar a un usuario.');
             if(payed.bot) return message.reply('No puedes pagar a un bot.');
             if(payed.id === user.id) return message.reply('No puedes pagarte a ti mismo.');
-            let amount = parseInt(args[1]);
+            let amount = args[1] === 'all' ? 'all' : parseInt(args[1]);
             if(!amount) return message.reply('Debes ingresar una cantidad a pagar.');
             if(isNaN(amount) && args[1] != 'all') return message.reply('Debes ingresar una cantidad válida a pagar.');
             let info = guild[user.id];

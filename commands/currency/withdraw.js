@@ -15,7 +15,7 @@ module.exports = {
         let user = message.author;
         db.get(message.guild.id).then(async guild => {
             let info = guild[user.id];
-            let amount = parseInt(args[0]);
+            let amount = args[0] === 'all' ? 'all' : parseInt(args[0]);
             if(!amount) return message.reply('Debes ingresar una cantidad a retirar.');
             if(amount > info.ballance.bank) return message.reply('No tienes esa cantidad de dinero en tu banco.');
             if(amount < 0) return message.reply('No puedes retirar una cantidad negativa.');
