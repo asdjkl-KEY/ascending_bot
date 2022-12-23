@@ -23,16 +23,14 @@ module.exports = {
             let usersId = Object.keys(guild);
             for(let i = 0; i < usersId.length; i++){
                 let user = await client.users.fetch(usersId[i]);
-                let userData = guild[usersId[i]];
-                let xp = userData.xp;
-                let level = userData.level;
-                if(!guild[usersId[i]][type]) continue;
+                if(!guild[usersId[i]][type] && type != 'money') continue;
+                if(type == 'money' && !guild[usersId[i]].ballance) continue;
                 let info = guild[usersId[i]];
                 info.user = user;
                 datas.push(info);
             }
             if(datas.length === 0) return message.reply('No hay datos para mostrar.');
-            datas.sort((a, b) => (type === 'money' ? (b.ballace.wallet + b.ballance.bank) : b[type]) - (type === 'money' ? (a.ballance.wallet + a.ballace.bank) : a[type]));
+            datas.sort((a, b) => (type == 'money' ? (b.ballace.wallet + b.ballance.bank) : b[type]) - (type == 'money' ? (a.ballance.wallet + a.ballace.bank) : a[type]));
             if(datas.length > 10){
                 let pages = Math.ceil(datas.length / 10);
                 if(page > pages) return message.reply('La página no existe.');
