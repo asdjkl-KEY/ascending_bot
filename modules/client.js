@@ -122,7 +122,7 @@ client.on(Events.MessageCreate, async (message) => {
                     }
                 }
             }
-            if(cmd.category === 'currency' && !g.currency) return;
+            if(cmd.category === 'currency' && !g.currency || cmd.category === 'currency' && message.channel.id != g.currency) return;
                 cmd.execute(client, message, args, {
                     BotProperties,
                     Databases: { general, Shop, registers, ranks, robs },
