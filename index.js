@@ -17,8 +17,6 @@ handler(path.join(__dirname, '/commands/utils/'));
 handler(path.join(__dirname, '/commands/owner/'));
 handler(path.join(__dirname, '/commands/currency/'));
 slashHandler.run();
-
-client.login(process.env['TOKEN']);
 server.listen(server.get('port'), () => {
     console.log(`Server listening on port ${server.get('port')}`);
 });
