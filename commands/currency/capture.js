@@ -13,12 +13,12 @@ module.exports = {
         let cooldown = R.cooldown;
         let user = message.author;
         let r = R.Databases.robs;
-        r.get(message.guild.id).then(async robs => {
+        let robs = await r.get(message.guild.id);
             if(!robs) return message.reply('No ha habido robos recientemente.');
             if(await cooldown.has(user, 'capture')) return message.reply(`Debes esperar **${await cooldown.get(user, 'capture')}** para usar este comando.`);
             let db = R.Databases.ranks;
             let e = R.emojis;
-            db.get(message.guild.id).then(async guild => {
+            let guild = await db.get(message.guild.id)
                 let info = guild[user.id];
                 robs.map(async rob => {
                     if(rob.validade <= Date.now()) return;
@@ -42,7 +42,5 @@ module.exports = {
                 await r.set(message.guild.id, []);
                 guild[user.id] = info;
                 await db.set(message.guild.id, guild);
-            })
-        })
     }
 }
