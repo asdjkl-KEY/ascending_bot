@@ -27,7 +27,9 @@ module.exports = {
                 let xp = userData.xp;
                 let level = userData.level;
                 if(!guild[usersId[i]][type]) continue;
-                datas.push(guild[usersId[i]]);
+                let info = guild[usersId[i]];
+                info.user = user;
+                datas.push(info);
             }
             if(datas.length === 0) return message.reply('No hay datos para mostrar.');
             datas.sort((a, b) => (type === 'money' ? (b.ballace.wallet + b.ballance.bank) : b[type]) - (type === 'money' ? (a.ballance.wallet + a.ballace.bank) : a[type]));
