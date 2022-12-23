@@ -226,6 +226,4 @@ client.on(Events.GuildMemberAdd, async member => {
         }
     }
 })
-
-
-module.exports = { client }
+client.login(process.env['TOKEN']);
