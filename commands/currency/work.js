@@ -60,12 +60,16 @@ module.exports = {
                         info.work.current = 'doctor';
                         info.work.totalWorks = 0;
                         info.work.salary = salaries.doctor;
+                        guild[user.id] = info;
+                        await db.set(message.guild.id, guild);
                         await msg.delete();
                         await message.reply('Has seleccionado doctor '+ e.doctor);
                     } else if(reaction.emoji.id === e.pica.split(':')[2].replace('>', '')){
                         info.work.current = 'minero';
                         info.work.totalWorks = 0;
                         info.work.salary = salaries.minero;
+                        guild[user.id] = info;
+                        await db.set(message.guild.id, guild);
                         await msg.delete();
                         await message.reply('Has seleccionado minero '+ e.pica)
                         info.work.current = 'minero'
@@ -73,6 +77,8 @@ module.exports = {
                         info.work.current = 'policia';
                         info.work.totalWorks = 0;
                         info.work.salary = salaries.policia;
+                        guild[user.id] = info;
+                        await db.set(message.guild.id, guild);
                         await msg.delete();
                         await message.reply('Has seleccionado policia ' + e.policia);
 
@@ -80,25 +86,31 @@ module.exports = {
                         info.work.current = 'constructor';
                         info.work.totalWorks = 0;
                         info.work.salary = salaries.constructor;
+                        guild[user.id] = info;
+                        await db.set(message.guild.id, guild);
                         await msg.delete();
                         await message.reply('Has seleccionado constructor ' + e.constructor);
                     } else if(reaction.emoji.name === e.bombero){
                         info.work.current = 'bombero';
                         info.work.totalWorks = 0;
                         info.work.salary = salaries.bombero;
+                        guild[user.id] = info;
+                        await db.set(message.guild.id, guild);
                         await msg.delete();
                         await message.reply('Has seleccionado bombero ' + e.bombero);
                     } else if(reaction.emoji.id === e.ladron.split(':')[2].replace('>', '')){
                         info.work.current = 'ladron';
                         info.work.totalWorks = 0;
                         info.work.salary = salaries.ladron;
+                        guild[user.id] = info;
+                        await db.set(message.guild.id, guild);
                         await msg.delete();
                         await message.reply('Has seleccionado ladrón ' + e.ladron);
                     }
                 })
-                guild[user.id] = info;
-                await db.set(message.guild.id, guild);
             }
+            guild = await db.get(message.guild.id);
+            info = guild[message.author.id];
             let quantity = Math.floor(Math.random() * (info.work.salary[1] - 500)) + info.work.salary[0];
             let trabajos = {
                 'minero': [
