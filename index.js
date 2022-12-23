@@ -4,7 +4,7 @@ const { client } = require('./modules/client');
 const server = require('./utils/server');
 const path = require('path');
 const handler = require('./modules/handler');
-const slashHandler = require('./modules/slashHandler');
+// const slashHandler = require('./modules/slashHandler');
 const { setRoot } = require('jesscode-lib');
 setRoot(path.join(__dirname, '/databases/'));
 
