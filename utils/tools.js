@@ -45,7 +45,7 @@ async function get(user, cmd){
                 let hours = times.hours;
                 let minutes = times.minutes;
                 let seconds = times.seconds;
-                let time = `${hours}${hours > 0 ? ' horas, ' : ''}${minutes}${minutes > 0 ? ' minutos y': ''}${seconds} segundos`;
+                let time = `${hours > 0 ? hours : ''}${hours > 0 ? ' horas, ' : ''}${minutes}${minutes > 0 ? ' minutos y ': ''}${seconds} segundos`;
                 return time;
             } else {
                 return false;
