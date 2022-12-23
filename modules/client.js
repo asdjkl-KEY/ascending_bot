@@ -25,34 +25,32 @@ client.on('messageCreate', async (message) => {
     const prefix = BotProperties.prefix;
     const user = message.author;
     if(message.author.bot || message.channel.type === 'DM') return;
-    ranks.get(message.guild.id).then(async guild => {
+    await ranks.get(message.guild.id).then(async guild => {
         if(!guild){
             guild= {};
             await ranks.set(message.guild.id, guild);
         }
     });
-    general.get(message.guild.id).then(async g => {
+    await general.get(message.guild.id).then(async g => {
         if(!g){
             g = {};
             await general.set(message.guild.id, g);
         }
     });
-    ranks.get(message.guild.id).then(async guild2 => {
-        if(!guild2[user.id]){
-            guild2[user.id] = {
-                level: 0,
-                xp: 0,
-                money: 0,
-                ballance: {
-                    bank: 0,
-                    wallet: 0
-                } 
-            }
-            await ranks.set(message.guild.id, guild2);
+    let guild2 = await ranks.get(message.guild.id);
+    if(!guild2[user.id]){
+        guild2[user.id] = {
+            level: 0,
+            xp: 0,
+            money: 0,
+            ballance: {
+                bank: 0,
+                wallet: 0
+            } 
         }
-    })
-    
-    general.get(message.guild.id).then(async g => {
+        await ranks.set(message.guild.id, guild2);
+    }
+    await general.get(message.guild.id).then(async g => {
         if(g['xpactived']){
             await ranks.get(message.guild.id).then(async guild => {
                 if(!guild[user.id]){
