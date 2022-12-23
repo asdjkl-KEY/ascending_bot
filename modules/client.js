@@ -21,7 +21,7 @@ const canvasWelcome = require('../helpers/canvasWelcome.js');
 const emojis = require('../helpers/emojis.js');
 const robs = new Database('robs');
 
-client.on('messageCreate', async (message) => {
+client.on(Events.MessageCreate, async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
     const prefix = BotProperties.prefix;
     const user = message.author;
@@ -136,7 +136,7 @@ client.on('messageCreate', async (message) => {
         }
     })
 })
-client.on('ready', async() => {
+client.on(Events.ClientReady, async() => {
     const prefix = BotProperties.prefix;
     const states = [prefix+"help", "Ascendiendo"]
     let setPresence = {
@@ -151,7 +151,7 @@ client.on('ready', async() => {
     setPresence.run(client);
     console.log("Bot is Ready!!")
 })
-client.on('interactionCreate', async (interaction) => {
+client.on(Events.InteractionCreate, async (interaction) => {
     if(interaction.isCommand()){
         const command = slashCommands.includes(interaction.commandName) ? require(path.join(__dirname,`../slashCommands/${interaction.commandName}.js`)) : null;
         if(!command) return interaction.reply({content: 'Comando no encontrado.', ephemeral: true});
@@ -215,7 +215,10 @@ client.on(Events.GuildMemberAdd, async member => {
             }
         }
     }
-}) 
+});
+client.on(Events.Warn, (e) => console.log(e.yellow));
+client.on(Events.Error, (e) => console.log(e.red));
+client.on(Events.Debug, (e) => console.log(e.blue));
 
 client.login(process.env['TOKEN']);
 
