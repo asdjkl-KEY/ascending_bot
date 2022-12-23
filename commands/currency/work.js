@@ -17,14 +17,7 @@ module.exports = {
         if(await cooldown.has(user, 'work')) return message.reply(`Debes esperar **${await cooldown.get(user, 'work')}** para usar este comando.`);
         db.get(message.guild.id).then(async guild => {
             let info = guild[user.id];
-            let salaries = {
-                doctor: [500, 1500],
-                minero: [500, 2000],
-                bombero: [500, 2000],
-                policia: [500, 1500],
-                constructor: [500, 2500],
-                ladron: [500, 1500]
-            }
+            
             if(!info.work){
                 info.work = {
                     current: 'none',
@@ -36,7 +29,7 @@ module.exports = {
                 //user select work
                 let embed = new R.embed()
                 .setTitle('Aún no tienes trabajo!')
-                .setDescription(`Selecciona un trabajo\nReacciona para recibir tu trabajo:
+                .setDescription(`Selecciona un trabajo\nEscribe !getwork <trabajo> para obtenerlo
                 ${e.doctor}: Doctor \`(30%+ en los comandos de juegos)\`
                 ${e.pica}: Minero \`(+20 de probabilidad de aumento de salario)\`
                 ${e.policia}: Policia \`(Puede atrapar a los usuarios que hayan robado en los últimos 30 segundos)\`
@@ -45,69 +38,7 @@ module.exports = {
                 ${e.ladron}: Ladrón \`(Nunca falla los robos + -30% cooldown en el comando rob)\`
                 `)
                 .setColor('#fcfc00')
-                .setFooter({text: 'Selecciona un trabajo en 3 minutos.'})
-                let msg = await message.reply({embeds: [embed]});
-                await msg.react(e.doctor);
-                await msg.react(e.pica);
-                await msg.react(e.policia);
-                await msg.react(e.constructor);
-                await msg.react(e.bombero);
-                await msg.react(e.ladron);
-                let filter = (reaction, user) => user.id === message.author.id;
-                let collector = msg.createReactionCollector({filter, time: 180000});
-                collector.on('collect', async (reaction, user) => {
-                    if(reaction.emoji.name === e.doctor){
-                        info.work.current = 'doctor';
-                        info.work.totalWorks = 0;
-                        info.work.salary = salaries.doctor;
-                        guild[user.id] = info;
-                        await db.set(message.guild.id, guild);
-                        await msg.delete();
-                        await message.reply('Has seleccionado doctor '+ e.doctor);
-                    } else if(reaction.emoji.id === e.pica.split(':')[2].replace('>', '')){
-                        info.work.current = 'minero';
-                        info.work.totalWorks = 0;
-                        info.work.salary = salaries.minero;
-                        guild[user.id] = info;
-                        await db.set(message.guild.id, guild);
-                        await msg.delete();
-                        await message.reply('Has seleccionado minero '+ e.pica)
-                        info.work.current = 'minero'
-                    } else if(reaction.emoji.name === e.policia){
-                        info.work.current = 'policia';
-                        info.work.totalWorks = 0;
-                        info.work.salary = salaries.policia;
-                        guild[user.id] = info;
-                        await db.set(message.guild.id, guild);
-                        await msg.delete();
-                        await message.reply('Has seleccionado policia ' + e.policia);
-
-                    } else if(reaction.emoji.name === e.constructor){
-                        info.work.current = 'constructor';
-                        info.work.totalWorks = 0;
-                        info.work.salary = salaries.constructor;
-                        guild[user.id] = info;
-                        await db.set(message.guild.id, guild);
-                        await msg.delete();
-                        await message.reply('Has seleccionado constructor ' + e.constructor);
-                    } else if(reaction.emoji.name === e.bombero){
-                        info.work.current = 'bombero';
-                        info.work.totalWorks = 0;
-                        info.work.salary = salaries.bombero;
-                        guild[user.id] = info;
-                        await db.set(message.guild.id, guild);
-                        await msg.delete();
-                        await message.reply('Has seleccionado bombero ' + e.bombero);
-                    } else if(reaction.emoji.id === e.ladron.split(':')[2].replace('>', '')){
-                        info.work.current = 'ladron';
-                        info.work.totalWorks = 0;
-                        info.work.salary = salaries.ladron;
-                        guild[user.id] = info;
-                        await db.set(message.guild.id, guild);
-                        await msg.delete();
-                        await message.reply('Has seleccionado ladrón ' + e.ladron);
-                    }
-                })
+                return message.reply({embeds: [embed]});
             }
             guild = await db.get(message.guild.id);
             info = guild[message.author.id];
