@@ -25,8 +25,8 @@ class Database extends LibEvent {
             password: process.env['PASSWORD'],
             key: key
         })
-        console.log(data.data);
-        return data.data;
+        console.log(data.data.data);
+        return data.data.data;
     }
     async set(key, value){
         await axios.post(this.url + '/set', {
@@ -43,7 +43,7 @@ class Database extends LibEvent {
             name: this.name,
             key: key
         });
-        if(data.data) return true
+        if(data.data.data) return true
         return false;
     }
 }
