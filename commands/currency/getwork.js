@@ -22,7 +22,7 @@ module.exports = {
         let info = guild[message.author.id];
         if(!info) return message.reply('No hay datos para mostrar.');
         if(info.work){
-            if(info.work.current) return message.reply('Ya tienes un trabajo.');
+            if(info.work.current && info.work.current !== 'none') return message.reply('Ya tienes un trabajo.');
         }
         let salaries = {
             doctor: [500, 1500],
