@@ -54,24 +54,13 @@ client.on('messageCreate', async (message) => {
     await general.get(message.guild.id).then(async g => {
         if(g['xpactived']){
             await ranks.get(message.guild.id).then(async guild => {
-                if(!guild[user.id]){
-                    guild[user.id] = {
-                        level: 0,
-                        xp: 0
-                    }
-                    await ranks.set(message.guild.id, guild);
-                }
                 let xp = message.content.length;
                 let finalXP = Math.floor(Math.random() * xp/10 * 7);
-                guild[user.id] = {
-                    level: guild[user.id].level,
-                    xp: guild[user.id].xp + finalXP
-                }
+                guild[user.id].level = guild[user.id].level,
+                guild[user.id].xp = guild[user.id].xp + finalXP
                 if(guild[user.id].xp >= levels[guild[user.id].level + 1]){
-                    guild[user.id] = {
-                        level: guild[user.id].level + 1,
-                        xp: guild[user.id].xp - levels[guild[user.id].level]
-                    }
+                    guild[user.id].level = guild[user.id].level + 1,
+                    guild[user.id].xp = guild[user.id].xp - levels[guild[user.id].level]
                 }
                 await ranks.set(message.guild.id, guild);
                 if(g['logslevel']){
