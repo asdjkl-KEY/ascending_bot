@@ -134,6 +134,7 @@ module.exports = {
                     }
                     info.ballace.wallet += quantity;
                     info.ballance.wallet += aumento;
+                    info.work.salary[1] += aumento;
                 } else {
                     info.ballance.wallet += quantity;
                     let probability = Math.floor(Math.random() * 100);
@@ -142,6 +143,7 @@ module.exports = {
                         embed.setFields({ name: '¡Has ganado un aumento de salario!', value: `**${extra}**${e.coin}` })
                     }
                     info.ballance.wallet += extra;
+                    info.work.salary[1] += extra;
                 }
                 guild[message.author.id] = info;
                 await db.set(message.guild.id, guild);
