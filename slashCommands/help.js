@@ -52,7 +52,7 @@ module.exports = {
         interaction.reply({embeds: [embed], components: [row]});
         //wait for select menu
         const filter = i => i.customId === 'help' && i.user.id === interaction.user.id;
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 120000 });
         collector.on('collect', async i => {
             let category = i.values[0];
             let description = '';
