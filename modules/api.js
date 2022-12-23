@@ -19,19 +19,13 @@ class Database extends LibEvent {
         });
         return;
     }
-    async #read(){
-        let data = await axios.post(this.url + '/read', {
-            name: this.name,
-            password: process.env['PASSWORD']
-        });
-        return data.data;
-    }
     async get(key, cb){
         let data = await axios.post(this.url + '/get', {
             name: this.name,
             password: process.env['PASSWORD'],
             key: key
         })
+        console.log(data.data);
         return data.data;
     }
     async set(key, value){
@@ -44,9 +38,12 @@ class Database extends LibEvent {
         return;
     }
     async has(key, cb){
-        let data = await this.#read();
-        if(cb) cb(data[key]);
-        if(data[key]) return true;
+        let data = await axios.post(this.url + '/get', {
+            password: process.env['PASSWORD'],
+            name: this.name,
+            key: key
+        });
+        if(data.data) return true
         return false;
     }
 }
