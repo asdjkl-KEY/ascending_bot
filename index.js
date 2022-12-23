@@ -16,7 +16,6 @@ handler(path.join(__dirname, '/commands/diversion/'));
 handler(path.join(__dirname, '/commands/utils/'));
 handler(path.join(__dirname, '/commands/owner/'));
 handler(path.join(__dirname, '/commands/currency/'));
-slashHandler.run();
 
 client.login(client.properties.token);
 
