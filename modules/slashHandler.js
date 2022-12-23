@@ -18,6 +18,10 @@ module.exports = {
     run: async() => {
         try {
             console.log('Started refreshing application (/) commands.'.yellow);
+            await rest.put(
+                Routes.applicationCommands(process.env['CLIENT_ID']),
+                { body: slashCommands },
+            );
             console.log('Successfully reloaded application (/) commands.'.green);
         } catch (err){
             console.error(err);
