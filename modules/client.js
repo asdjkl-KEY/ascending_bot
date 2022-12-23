@@ -1,6 +1,7 @@
 const { GatewayIntentBits, Client, Collection, EmbedBuilder, PermissionsBitField, Events } = require('discord.js');
 const client = new Client({ intents: [3276799] });
 client.properties = {};
+require('dotenv').config();
 client.properties.token = process.env['TOKEN'];
 const BotProperties = require('../helpers/botProperties.json');
 const { Database } = require('jesscode-lib');

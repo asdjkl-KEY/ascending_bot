@@ -10,3 +10,5 @@ run.bat
 setup.bat
 update.bat
 /databases
+.replit
+replit.nix
