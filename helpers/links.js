@@ -18,5 +18,6 @@ module.exports = {
         'https://media.discordapp.net/attachments/926992209532825610/1054497831785865276/book.png',
         'https://media.discordapp.net/attachments/926992209532825610/1054497832196915230/cooked_chicken.png',
         'https://media.discordapp.net/attachments/926992209532825610/1054497832561811476/diamond.png'
-    ]
+    ],
+    roulette: 'https://media.discordapp.net/attachments/926992209532825610/1056053801641066607/ruleta-03.gif'
 }

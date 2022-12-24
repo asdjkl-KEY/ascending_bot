@@ -20,6 +20,7 @@ let p = PermissionsBitField.Flags;
 const canvasWelcome = require('../helpers/canvasWelcome.js');
 const emojis = require('../helpers/emojis.js');
 const robs = new Database('robs');
+const roulette = new Database('roulette');
 
 client.on(Events.MessageCreate, async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
@@ -125,7 +126,7 @@ client.on(Events.MessageCreate, async (message) => {
             if(cmd.category === 'currency' && !g.currency || cmd.category === 'currency' && message.channel.id != g.currency) return;
                 cmd.execute(client, message, args, {
                     BotProperties,
-                    Databases: { general, Shop, registers, ranks, robs },
+                    Databases: { general, Shop, registers, ranks, robs, roulette },
                     embed: EmbedBuilder,
                     links,
                     xl,
