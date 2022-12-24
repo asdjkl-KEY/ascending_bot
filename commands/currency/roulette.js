@@ -65,13 +65,13 @@ module.exports = {
         .setDescription(`Has apostado **${quantity}** ${e.coin} a **${colornumber}** en unos segundos se revelará el resultado`)
         .setColor('#03fc03')
         .setImage(R.links.roulette)
-        embed2.setFields({name: 'Faltan', value: `${await R.getTime(rGuild.time - Date.now())}`})
-        message.channel.send({embeds: [embed2]});
+        embed2.setFields({name: 'Faltan', value: `**${await R.getTime(rGuild.time - Date.now())}**`})
+        message.reply({embeds: [embed2]});
+        await r.set(message.guild.id, rGuild);
 
         async function checkRoulette(){
-            if(rGuild.time < Date.now() && rGuild.first == true){
+            if(rGuild.first == true){
                 rGuild.first = false;
-                await r.set(message.guild.id, rGuild);
                 setTimeout(async () => {
                     let g = await db.get(message.guild.id);
                     let rr = await r.get(message.guild.id);
@@ -98,7 +98,7 @@ module.exports = {
                     }
                     if(winners.length > 0){
                         embed.setFields(
-                            {name: 'Ganadores', value: winners.join('\n')}
+                            {name: 'Ganadores', value: `${ winners.join('\n')}`}
                         )
                     } else {
                         embed.setFields(
