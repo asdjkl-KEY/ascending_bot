@@ -31,10 +31,16 @@ module.exports = {
             await r.set(message.guild.id, rGuild);
         }
         if(rGuild){
+            if(!rGuild.time) rGuild.time = Date.now() + 30000;
+            if(!rGuild.first) rGuild.first = true;
             if(!rGuild.users[message.author.id]){
                 rGuild.users[message.author.id] = {
                     quantity: quantity,
                     colorOrNumber: colornumber
+                }
+                if(rGuild.first == false && rGuild.time < Date.now()){
+                    rGuild.time = Date.now() + 30000;
+                    rGuild.first = true;
                 }
                 await r.set(message.guild.id, rGuild);
             } else {
