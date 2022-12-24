@@ -106,6 +106,8 @@ module.exports = {
                         )
                     }
                     message.channel.send({embeds: [embed]});
+                    rGuild.users = {};
+                    await r.set(message.guild.id, rGuild);
                 }, rGuild.time - Date.now())
             }
         }
