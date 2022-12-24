@@ -37,7 +37,7 @@ module.exports = {
                 .setTitle('Aún no tienes trabajo!')
                 .setDescription(`Selecciona un trabajo\nEscribe !getwork <trabajo> para obtenerlo
                 ${e.doctor}: Doctor \`(30%+ en los comandos de juegos)\`
-                ${e.pica}: Minero \`(+20 de probabilidad de aumento de salario)\`
+                ${e.minero}: Minero \`(+20 de probabilidad de aumento de salario)\`
                 ${e.policia}: Policia \`(Puede atrapar a los usuarios que hayan robado en los últimos 30 segundos)\`
                 ${e.constructor}: Constructor \`(Posibilidad de ganar dinero extra en cada trabajo)\`
                 ${e.bombero}: Bombero \`(30% menos de cooldown)\`
@@ -115,7 +115,7 @@ module.exports = {
             let job = trabajos[info.work.current][Math.floor(Math.random() * trabajos[info.work.current].length)];
             let embed = new R.embed()
                 .setAuthor({ name: message.author.username, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
-                .setDescription(job)
+                .setDescription(`$${e[info.work.current]} ${job}`)
                 .setColor("#00fc00")
                 if(info.work.current === 'constructor'){
                     let probability = Math.floor(Math.random() * 100);

@@ -5,7 +5,7 @@ module.exports = {
     wallet: '<:wallet:1055468398009655346>',
     bank: '🏦',
     moneybag: '💰',
-    pica: '<:pica_comun:873587586617200700>',
+    minero: '<:pica_comun:873587586617200700>',
     doctor: '🩺',
     bombero: '🚒',
     constructor: '🏗️',
