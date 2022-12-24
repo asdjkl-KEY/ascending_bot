@@ -91,7 +91,7 @@ module.exports = {
 
         message.reply({ embeds: [embed2] });
         setTimeout(() => {
-            message.channel.send(embed)
+            message.channel.send({ embeds: [embed] });
         }, 30000)
     }
 }
