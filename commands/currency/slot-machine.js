@@ -12,6 +12,7 @@ module.exports = {
     async execute(client, message, args, R){
         let quantity = parseInt(args[0]);
         let user = message.author;
+        let e = R.emojis;
         if(!quantity) return message.reply('Debes ingresar una cantidad');
         if(isNaN(quantity)) return message.reply('Debes ingresar una cantidad válida');
         if(quantity < 1) return message.reply('Debes ingresar una cantidad válida');
@@ -23,6 +24,7 @@ module.exports = {
         if(!info) return message.reply('No estás registrado en la base de datos');
         if(quantity > info.ballance.wallet) return message.reply('No tienes suficiente dinero para apostar esa cantidad');
         info.ballance.wallet -= quantity;
+        let probability = Math.floor(Math.random() * 100);
         let slot = ['🍎', '🍇', '🍒', '🍋', '🍓', '🥝']    
         let slot1 = slot[Math.floor(Math.random() * slot.length)];
         let slot2 = slot[Math.floor(Math.random() * slot.length)];
@@ -34,6 +36,22 @@ module.exports = {
         let slot8 = slot[Math.floor(Math.random() * slot.length)];
         let slot9 = slot[Math.floor(Math.random() * slot.length)];
         let msg;
+        if(probability > 90){
+            slot4 = e.coin;
+            slot5 = e.coin;
+            slot6 = e.coin;
+        }
+        if(probability > 98){
+            slot1 = e.coin;
+            slot2 = e.coin;
+            slot3 = e.coin;
+            slot4 = e.coin;
+            slot5 = e.coin;
+            slot6 = e.coin;
+            slot7 = e.coin;
+            slot8 = e.coin;
+            slot9 = e.coin;
+        }
         let lost = false;
         let doctor = false;
         if(info.work){
