@@ -89,7 +89,7 @@ module.exports = {
         .setColor('#03fc03')
         .setImage(R.links.roulette)
 
-        message.reply(embed2);
+        message.reply({ embeds: [embed2] });
         setTimeout(() => {
             message.channel.send(embed)
         }, 30000)
