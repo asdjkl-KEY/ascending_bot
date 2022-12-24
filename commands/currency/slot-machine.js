@@ -23,7 +23,7 @@ module.exports = {
         if(!info) return message.reply('No estás registrado en la base de datos');
         if(quantity > info.ballance.wallet) return message.reply('No tienes suficiente dinero para apostar esa cantidad');
         info.ballance.wallet -= quantity;
-        let slot = ['🍎', '🍊', '🍇', '🍒', '🍋', '🍉', '🍓', '🍐', '🥝']    
+        let slot = ['🍎', '🍇', '🍒', '🍋', '🍓', '🥝']    
         let slot1 = slot[Math.floor(Math.random() * slot.length)];
         let slot2 = slot[Math.floor(Math.random() * slot.length)];
         let slot3 = slot[Math.floor(Math.random() * slot.length)];
