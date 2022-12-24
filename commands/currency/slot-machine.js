@@ -36,12 +36,12 @@ module.exports = {
         let slot8 = slot[Math.floor(Math.random() * slot.length)];
         let slot9 = slot[Math.floor(Math.random() * slot.length)];
         let msg;
-        if(probability > 90){
+        if(probability > 75){
             slot4 = e.coin;
             slot5 = e.coin;
             slot6 = e.coin;
         }
-        if(probability > 98){
+        if(probability > 97){
             slot1 = e.coin;
             slot2 = e.coin;
             slot3 = e.coin;
@@ -65,7 +65,7 @@ module.exports = {
             info.ballance.wallet += doctor == true ? quantity*10 + (quantity*9)*0.30 : quantity*10;
             msg = `¡Has ganado **${doctor == true ? quantity*9 + (quantity*9)*0.30 : quantity*9}**!`
         }
-        if(slot4 !== slot5 || slot5 !== 6 || slot4 !== slot6){
+        if(slot4 !== slot5 || slot5 !== slot6 || slot4 !== slot6){
             msg = `Has perdido **${quantity}**`;
             lost = true;
         }
