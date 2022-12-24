@@ -51,15 +51,24 @@ client.on(Events.MessageCreate, async (message) => {
         }
     });
     let guild2 = await ranks.get(message.guild.id);
-    if(!guild2[user.id]){
-        guild2[user.id] = {
-            level: 0,
-            xp: 0,
-            money: 0,
-            ballance: {
-                bank: 0,
-                wallet: 0
-            } 
+    if(guild2){
+        if(!guild2[user.id]){
+            guild2[user.id] = {
+                level: 0,
+                xp: 0,
+                ballance: {
+                    bank: 0,
+                    wallet: 0
+                }
+            }
+        }
+        if(guild2[user.id]){
+            if(!guild2[user.id].ballance){
+                guild2[user.id].ballance = {
+                    bank: 0,
+                    wallet: 0
+                }
+            }
         }
         await ranks.set(message.guild.id, guild2);
     }
