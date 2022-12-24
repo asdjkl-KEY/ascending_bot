@@ -21,6 +21,17 @@ const canvasWelcome = require('../helpers/canvasWelcome.js');
 const emojis = require('../helpers/emojis.js');
 const robs = new Database('robs');
 const roulette = new Database('roulette');
+const parseTime = require('parse-ms-2');
+
+async function getTime(time){
+    let times = parseTime(time);
+    let days = times.days;
+    let hours = times.hours;
+    let minutes = times.minutes;
+    let seconds = times.seconds;
+    time = `${days > 0 ? days: ''} ${days > 0 ? 'días, ':''} ${hours > 0 ? hours: ''} ${hours > 0 ? 'horas, ':''} ${minutes > 0 ? minutes: ''} ${minutes > 0 ? 'minutos y ':''} ${seconds > 0 ? seconds: ''} ${seconds > 0 ? 'segundos.':''}`;
+    return time;
+}
 
 client.on(Events.MessageCreate, async (message) => {
     const xl = await axl.Login('j.tu.jess04@gmail.com', process.env["XBOX"]);
@@ -131,7 +142,8 @@ client.on(Events.MessageCreate, async (message) => {
                     links,
                     xl,
                     cooldown,
-                    emojis
+                    emojis,
+                    getTime
                 }).then(() => {})
                 .catch(err => console.log(err));
         }

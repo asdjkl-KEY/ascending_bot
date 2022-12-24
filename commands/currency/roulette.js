@@ -24,7 +24,9 @@ module.exports = {
         let e = R.emojis;
         if(!rGuild){
             rGuild = {
-                users: {}
+                users: {},
+                time: Date.now() + 30000,
+                first: true
             }
             await r.set(message.guild.id, rGuild);
         }
@@ -54,44 +56,58 @@ module.exports = {
         if(number == 0) color = 'verde';
         let win = false;
         if(colornumber == color || colornumber == number) win = true;
-        let description = `La bola ha caido en el número \`${number}\`, color \`${color}\`\n\n`;
-        let embed = new R.embed()
-        .setTitle('RULETA')
-        .setDescription(description)
-        .setColor(win == true ? "#03fc03" : "#fc0303");
         //set winners
-        let ids = Object.keys(rGuild.users);
-        let winners = [];
-        for(let i = 0; i < ids.length; i++){
-            let id = ids[i];
-            let user = rGuild.users[id];
-            if(user.colorOrNumber == color || user.colorOrNumber == number){
-                winners.push(client.users.fetch(id) || client.users.cache.get(id));
-            }
-        }
-        if(winners.length > 0){
-            let winnersString = '';
-            for(let i = 0; i < winners.length; i++){
-                let winner = winners[i];
-                winnersString += `${winner}\n`;
-            }
-            embed.setFields(
-                { name: 'Ganadores', value: winnersString }
-            );
-        } else {
-            embed.setFields(
-                { name: 'Ganadores', value: 'No hay ganadores F' }
-            );
-        }
+        info.ballance.wallet -= quantity;
+        guild[user.id] = info;
+        await db.set(message.guild.id, guild);
         let embed2 = new R.embed()
         .setTitle('RULETA')
         .setDescription(`Has apostado **${quantity}** ${e.coin} a **${colornumber}** en unos segundos se revelará el resultado`)
         .setColor('#03fc03')
         .setImage(R.links.roulette)
 
-        message.reply({ embeds: [embed2] });
-        setTimeout(() => {
-            message.channel.send({ embeds: [embed] });
-        }, 30000)
+        async function checkRoulette(){
+            if(rGuild.time < Date.now() && rGuild.first == true){
+                embed2.setFields({name: 'Faltan', value: `${await R.getTime(rGuild.time - Date.now())}`})
+                message.channel.send({embeds: [embed2]});
+                rGuild.first = false;
+                await r.set(message.guild.id, rGuild);
+                setTimeout(async () => {
+                    let g = await db.get(message.guild.id);
+                    let rr = await r.get(message.guild.id);
+                    if(!rr) return;
+                    if(!rr.users) return;
+                    let us = Object.keys(rr.users);
+                    let winners = [];
+                    let description = `La bola ha caido en el número \`${number}\`, color \`${color}\`\n\n`;
+                    let embed = new R.embed()
+                    .setTitle('RULETA')
+                    .setDescription(description)
+                    .setColor(win == true ? "#03fc03" : "#fc0303");
+                    for (let i of us){
+                        let u = rr.users[i];
+                        if(u.colorOrNumber == color || u.colorOrNumber == number){
+                            let ug = g[i];
+                            if(!ug) continue;
+                            if(!ug.ballance) continue;
+                            ug.ballance.wallet += u.quantity * 2;
+                            g[i] = ug;
+                            await db.set(message.guild.id, g);
+                            winners.push(`<@${i}>`);
+                        }
+                    }
+                    if(winners.length > 0){
+                        embed.setFields(
+                            {name: 'Ganadores', value: winners.join('\n')}
+                        )
+                    } else {
+                        embed.setFields(
+                            {name: 'Ganadores', value: 'No hay ganadores'}
+                        )
+                    }
+                    message.channel.send({embeds: [embed]});
+                }, rGuild.time - Date.now())
+            }
+        }
     }
 }

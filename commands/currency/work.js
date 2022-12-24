@@ -25,6 +25,12 @@ module.exports = {
                     salary: [0, 0]
                 };
             }
+            if(info.ballance){
+                info.ballance = {
+                    bank: 0,
+                    wallet: 0
+                }
+            }
             if(info.work.current === 'none'){
                 //user select work
                 let embed = new R.embed()
