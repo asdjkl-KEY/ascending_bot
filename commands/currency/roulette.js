@@ -65,11 +65,11 @@ module.exports = {
         .setDescription(`Has apostado **${quantity}** ${e.coin} a **${colornumber}** en unos segundos se revelará el resultado`)
         .setColor('#03fc03')
         .setImage(R.links.roulette)
+        embed2.setFields({name: 'Faltan', value: `${await R.getTime(rGuild.time - Date.now())}`})
+        message.channel.send({embeds: [embed2]});
 
         async function checkRoulette(){
             if(rGuild.time < Date.now() && rGuild.first == true){
-                embed2.setFields({name: 'Faltan', value: `${await R.getTime(rGuild.time - Date.now())}`})
-                message.channel.send({embeds: [embed2]});
                 rGuild.first = false;
                 await r.set(message.guild.id, rGuild);
                 setTimeout(async () => {
@@ -109,5 +109,6 @@ module.exports = {
                 }, rGuild.time - Date.now())
             }
         }
+        checkRoulette();
     }
 }
