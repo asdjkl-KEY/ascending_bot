@@ -13,6 +13,7 @@ module.exports = {
         let quantity = parseInt(args[0]);
         let user = message.author;
         let e = R.emojis;
+        let slot = ['🍇', '🍒', '🍊', '🍋', '🍓', '🍍', '🍉', '🍎', '🍐', '🍑', '🍈', '🍌', '🍆', '🍅', '🥑', '🥝', '🥥', '🥦', '🥒', '🥕'];
         if(!quantity) return message.reply('Debes ingresar una cantidad');
         if(isNaN(quantity)) return message.reply('Debes ingresar una cantidad válida');
         if(quantity < 1) return message.reply('Debes ingresar una cantidad válida');
@@ -25,7 +26,6 @@ module.exports = {
         if(quantity > info.ballance.wallet) return message.reply('No tienes suficiente dinero para apostar esa cantidad');
         info.ballance.wallet -= quantity;
         let probability = Math.floor(Math.random() * 100);
-        let slot = ['🍎', '🍇', '🍒', '🍋', '🍓', '🥝']    
         let slot1 = slot[Math.floor(Math.random() * slot.length)];
         let slot2 = slot[Math.floor(Math.random() * slot.length)];
         let slot3 = slot[Math.floor(Math.random() * slot.length)];
