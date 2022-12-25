@@ -158,7 +158,7 @@ client.on(Events.MessageCreate, async (message) => {
         }
     })
 })
-client.on(Events.ClientReady, async() => {
+client.once(Events.ClientReady, async() => {
     const prefix = BotProperties.prefix;
     const states = [prefix+"help", "Ascendiendo"]
     let setPresence = {
