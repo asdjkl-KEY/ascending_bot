@@ -1,6 +1,15 @@
 require('dotenv').config();
 require('colors');
 const { client } = require('./modules/client');
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
+client.login(process.env['TOKEN']);
 const server = require('./utils/server');
 const path = require('path');
 const handler = require('./modules/handler');
@@ -22,9 +31,6 @@ handler(path.join(__dirname, '/commands/currency/'));
 // if (!client.ws.shards.get(0).status === 0) client.login(process.env['TOKEN']);
 // if (!client.ws.shards.get(0).status === 0) client.login(process.env['TOKEN']);
 
-client.login(process.env['TOKEN']);
-client.login(process.env['TOKEN']);
-client.login(process.env['TOKEN']);
 server.listen(server.get('port'), () => {
     console.log(`Server listening on port ${server.get('port')}`);
 });

@@ -1,1 +1,200 @@
-{}
+{
+    "852285055745523713": {
+        "633953229381697537": {
+            "level": 2,
+            "xp": 212,
+            "money": 1000,
+            "ballance": {
+                "bank": 12102,
+                "wallet": 0
+            },
+            "work": {
+                "current": "ladron",
+                "salary": [
+                    500,
+                    4305
+                ]
+            }
+        },
+        "910173115353538570": {
+            "level": 1,
+            "xp": 71,
+            "money": 1000,
+            "ballance": {
+                "bank": 1000,
+                "wallet": 0
+            },
+            "work": {
+                "current": "ladron",
+                "salary": [
+                    500,
+                    1500
+                ]
+            }
+        },
+        "824328519215480892": {
+            "level": 0,
+            "xp": 1,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "896310346820767785": {
+            "level": 0,
+            "xp": 4,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            },
+            "work": {
+                "current": "minero",
+                "salary": [
+                    500,
+                    2000
+                ]
+            }
+        }
+    },
+    "972944319285698570": {
+        "827762608429465622": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "620281390428323860": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "397411831204937729": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "862753187932930088": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "984231062307737600": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "861939732949499915": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "1050128394123223162": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "684852694196027415": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "633953229381697537": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "751887075640344596": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "401170116508909578": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "652439870647697420": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "1055539346582818957": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        },
+        "897268960536432690": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        }
+    },
+    "867613670674399252": {
+        "633953229381697537": {
+            "level": 0,
+            "xp": 0,
+            "money": 0,
+            "ballance": {
+                "bank": 0,
+                "wallet": 0
+            }
+        }
+    }
+}
